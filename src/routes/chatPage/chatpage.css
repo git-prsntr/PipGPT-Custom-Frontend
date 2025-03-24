@@ -1,0 +1,121 @@
+.chatpage {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    position: relative;
+    padding: 20px 0;
+    margin: 0 10px;
+    /* Glassmorphism Effect */
+    background: rgba(255, 255, 255, 0.1);
+    /* Semi-transparent background */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    /* Safari Support */
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+}
+
+.wrapper {
+    flex: 1;
+    overflow: auto;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.chat {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+p, li {
+    margin: 10px 0;
+}
+
+.message {
+    padding: 15px 20px;
+    border-radius: 20px;
+    max-width: 70%; /* Adjusts width of message bubbles */
+    word-wrap: break-word;
+    margin-top: 10px;
+    position: relative;
+    
+    /* Styles for user messages */
+    &.user {
+        color: #88a8e2;
+        font-size: large;
+        font-weight: 600; /* Pink for user messages */
+        align-self: flex-end; /* Align user messages to the right */
+        text-align: right; /* Text inside message is right-aligned */
+        margin-left: auto; /* Ensure message stays on the right */
+        margin-right: 0; /* Avoid unnecessary margin on the right */
+    }
+
+    /* Styles for assistant messages */
+    &.assistant { /* Light gray for assistant messages */
+        align-self: flex-start; /* Align assistant messages to the left */
+        text-align: left; /* Left-align text inside the bubble */
+        margin-right: auto; /* Ensure message stays on the left */
+        margin-left: 0; /* Avoid unnecessary margin on the left */
+    }
+}
+
+.titleSection {
+    display: flex; /* Enables flexbox for horizontal alignment */
+    align-items: center; /* Ensures vertical centering for all items */
+    justify-content: space-between; /* Adds space between button, title, and h3 */
+    margin-bottom: 10px; /* Adds spacing below the container */
+    gap: 10px; /* Adds space between the back button and the title */
+    padding:0 20px;
+}
+
+.backButton {
+    background-color: #ba181b;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 14px;
+    cursor: pointer;
+    text-align: center; 
+}
+
+.backButton:hover {
+    background-color: #660708;
+    transition: background-color 0.3s ease;
+}
+
+.titleSection h2 {
+    margin: 0;
+    font-size: 14px;
+    font-weight: bold;
+    color: white; /* Adjust text color */
+    white-space: nowrap; /* Prevent wrapping of the title */
+    line-height: 1; /* Ensures the title aligns perfectly */
+}
+
+.titleSection h3 {
+    margin-right: 20px;
+    font-size: 10px;
+    font-weight: normal;
+    color: #cecece; /* Adjust text color */
+    white-space: nowrap; /* Prevent wrapping */
+    line-height: 1; /* Ensures alignment with the title */
+}
+
+.message.assistant.loading {
+    width:95%;
+    background-color: #1b2b4f; /* Match assistant background */
+    color: #7a92b0; /* Subtle color for loading text */
+    text-align: center;
+    padding: 10px;
+    border-radius: 5px;
+    max-width: 98%;
+    align-self: flex-end;
+    margin-bottom: 10px;
+    font-style: italic; /* Make it visually distinct */
+}

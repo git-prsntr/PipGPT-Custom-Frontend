@@ -1,0 +1,200 @@
+/* Temporary Chat Page */
+.temporaryChat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  margin: 0 10px;
+  position: relative;
+
+  /* Glassmorphism Effect */
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
+/* Welcome Text */
+.topBar {
+  display: flex;
+  justify-content: flex-start;
+  align-items: left;
+  width: 100%;
+}
+
+.topBar h1 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #ffffff;
+  text-align: left;
+  margin-left: 20px;
+  margin-bottom: 20px;
+}
+
+/* Chat Container */
+.chatContainer {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Message Bubbles */
+.message {
+  padding: 15px 20px;
+  border-radius: 20px;
+  max-width: 70%;
+  word-wrap: break-word;
+  margin-bottom: 10px;
+}
+
+/* User messages (right aligned) */
+.message.user {
+  align-self: flex-start;
+  background-color: #660708;
+  color: #d3d3d3;
+  text-align: right;
+}
+
+/* Assistant messages (left aligned) */
+.message.assistant {
+  align-self: flex-start;
+  background-color: #0b090a;
+  color: #b1a7a6;
+  text-align: left;
+}
+
+/* Loading message styling */
+.message.assistant.loading {
+  text-align: center;
+  font-style: italic;
+}
+
+/* Form container matching dashboard style */
+.formContainer {
+  width: 95%;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  margin-top: 20px;
+  margin-bottom: 30px;
+  position: relative;
+  min-height: 160px;
+  max-height: 400px;
+  overflow: hidden;
+  transition: height 0.3s ease-out;
+
+  /* Glassmorphism Effect */
+  background: rgba(82, 82, 82, 0.8);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Form inside container */
+.formContainer form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Textarea with dynamic resizing */
+.formContainer textarea {
+  width: 100%;
+  padding: 15px;
+  min-height: 50px;
+  max-height: 250px;
+  overflow-y: auto;
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  border-radius: 10px;
+  outline: none;
+  color: #ffffff;
+  font-size: 16px;
+  resize: none;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  transition: all 0.3s ease-out;
+}
+
+/* Expands when focused */
+.formContainer textarea:focus {
+  background: rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+/* Placeholder styling */
+.formContainer textarea::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+  font-style: italic;
+}
+
+/* Button container with consistent spacing */
+.button-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  min-height: 60px; /* Fixed space for buttons */
+  width: 100%;
+}
+
+/* Submit button */
+.formContainer button {
+  background: #ba181b;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  padding: 12px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s ease;
+}
+.formContainer button:hover {
+  background: rgba(186, 24, 27, 0.8);
+}
+
+/* Font Awesome icon inside button */
+.formContainer button i {
+  font-size: 18px;
+  color: white;
+}
+
+/* Model Selection */
+.choosemodel {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+
+/* Individual Toggle Options */
+.modelToggleOption {
+  flex: 1;
+  text-align: center;
+  padding: 10px;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 14px;
+  transition: all 0.3s ease;
+  border-radius: 10px;
+}
+
+/* Active Model with Highlight */
+.modelToggleOption.active {
+  color: #ffffff;
+  background: rgba(186, 24, 27, 0.5);
+  border: 1px solid rgba(186, 24, 27, 0.6);
+  box-shadow: 0 4px 20px rgba(186, 24, 27, 0.4);
+  transform: translateY(-1px);
+}

@@ -1,0 +1,144 @@
+/* Main container */
+.exPrompts {
+    padding: 20px;
+    color: white;
+    overflow-y: auto;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 0 10px;
+
+    /* Glassmorphism Effect */
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Header */
+.exPrompts h1 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 20px;
+}
+
+/* Grid container for tiles */
+.promptsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    /* Responsive grid */
+    gap: 20px;
+    width: 100%;
+}
+
+/* Individual Prompt Tiles */
+.prompt_Tile {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+/* Tile hover effect */
+.prompt_Tile:hover {
+    transform: translateY(-3px);
+    background: rgba(186, 24, 27, 0.5);
+    border: 1px solid rgba(186, 24, 27, 0.6);
+}
+
+/* Tile header (Icon + Title) */
+.tileHeader {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.tileHeader h3 {
+    font-size: 18px;
+    color: white;
+}
+
+/* Font Awesome Icons */
+.icon {
+    font-size: 18px;
+    color: white;
+}
+
+/* Prompt list inside tiles */
+.promptList {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Individual prompt items */
+.promptItem {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 14px;
+    color: white;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+}
+
+/* Hover effect on prompt items */
+.promptItem:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* Expanded prompt item */
+.promptItem.expanded {
+    background: rgba(186, 24, 27, 0.3); /* Slightly different color for active state */
+    border: 1px solid rgba(186, 24, 27, 0.6); /* Add a border for emphasis */
+}
+
+/* GPT Options */
+.gptOptions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+/* Individual GPT Option */
+.gptOption {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 14px;
+    color: white;
+    transition: background 0.3s ease;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.gptOption:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* Icons inside GPT options */
+.modelIcon {
+    font-size: 16px;
+    color: white;
+}
+
+/* Responsive Fixes */
+@media screen and (max-width: 768px) {
+    .promptsGrid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+}

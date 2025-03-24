@@ -1,0 +1,644 @@
+.chatList {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 20px 10px;
+    overflow: hidden;
+
+    /* Glassmorphism Effect */
+    background: rgba(255, 255, 255, 0.1);
+    /* Semi-transparent background */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    /* Safari Support */
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Adding red blobs using ::before and ::after */
+.chatList::before,
+.chatList::after {
+    content: "";
+    position: absolute;
+    opacity: 60%;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(186, 24, 27, 0.5) 0%, rgba(102, 7, 8, 0.3) 100%);
+    border-radius: 80%;
+    filter: blur(90px);
+    z-index: -1;
+    animation: blobAnimation 10s infinite alternate ease-in-out;
+}
+
+/* First red blob - Top Left */
+.chatList::before {
+    top: 10px;
+    left: 180px;
+    animation-delay: 0s;
+}
+
+/* second red blob - Top Left */
+.chatList::after {
+    bottom: -40px;
+    left: -90px;
+    animation-delay: 2s;
+}
+
+/* Keyframes for smooth floating movement */
+@keyframes blobAnimation {
+    0% {
+        transform: translate(0, 0) scale(1);
+    }
+
+    50% {
+        transform: translate(20px, -20px) scale(1.1);
+    }
+
+    100% {
+        transform: translate(-20px, 20px) scale(1);
+    }
+}
+
+
+
+
+hr {
+    border: none;
+    height: 2px;
+    background-color: #ddd;
+    opacity: 0.1;
+    border-radius: 5px;
+    margin: 10px 0px;
+}
+
+/* Title styling with subtle glow */
+.title {
+    font-weight: 400;
+    font-size: 14px;
+    margin-bottom: 10px;
+    color: #e87c7e;
+    letter-spacing: 1px;
+}
+
+.list {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    margin-bottom: 10px;
+    padding-right: 5px;
+    font-size: 14px;
+}
+
+
+.pinned-list {
+    max-height: 80px;
+    overflow-y: auto;
+}
+
+.all-chats-list {
+    flex-grow: 1;
+    overflow-y: auto;
+}
+
+.subHeading {
+    font-size: 0.8em;
+    color: #666;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+
+/* Chat Item */
+.chatItem {
+    position: relative; /* Ensure the menu is positioned relative to the chat item */
+    display: flex;
+    align-items: center;
+    margin-top: 5px;
+    justify-content: space-between;
+    padding: 5px;
+    border-radius: 10px;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+}
+
+.chatItem:hover {
+    background: rgba(186, 24, 27, 0.3);
+    border: 1px solid rgba(186, 24, 27, 0.5);
+    box-shadow: 0 4px 10px rgba(186, 24, 27, 0.3);
+}
+
+/* Menu Button */
+.menuButton {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5em;
+    cursor: pointer;
+}
+
+/* Menu */
+.menu {
+    position: absolute;
+    top: 100%; /* Position the menu below the chat item */
+    right: 0; /* Align the menu to the right of the chat item */
+    background-color: #161a1d;
+    border: 1px solid #ba181b;
+    border-radius: 5px;
+    z-index: 10; /* Ensure the menu appears above other elements */
+    display: none; /* Hide the menu by default */
+}
+
+.menu.show-menu {
+    display: block; /* Show the menu when active */
+}
+
+/* Menu List */
+.menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.menu li {
+    padding: 5px 10px;
+    cursor: pointer;
+    color: white;
+}
+
+.menu li:hover {
+    background-color: #660708;
+}
+
+.folderlist {
+    display: flex;
+    flex-direction: column;
+    max-height: 300px;
+    overflow-y: auto;
+    margin-top: auto;
+}
+
+.folderitem {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    border-radius: 5px;
+    position: relative;
+    transition: background-color 0.2s ease;
+    margin-bottom: 10px;
+    font-weight: 400;
+    font-size: 14px;
+}
+
+.folderitem:hover {
+    background-color: #660708;
+}
+
+.folderHeaderContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    cursor: pointer;
+
+}
+
+.folderHeaderContainer i {
+    margin-right: 10px;
+}
+
+
+/* Chats inside the folder, aligned underneath the folder name */
+.folderChats {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+    /* Adds space between folder name and chat list */
+    padding-left: 30px;
+    /* Indent to show it's inside the folder */
+}
+
+.folderChats div {
+    padding: 5px 0;
+    cursor: pointer;
+    color: white;
+}
+
+.folderChats div:hover {
+    text-decoration: underline;
+    color: #ddd;
+}
+
+.folderChats a {
+    text-decoration: none;
+    color: #ccc;
+    font-weight: 500;
+}
+
+.folderChats a:hover {
+    text-decoration: underline;
+}
+
+/* Move to folder select dropdown */
+.moveToFolder select {
+    background-color: #161a1d;
+    border: 1px solid #ba181b;
+    color: white;
+    padding: 5px;
+    margin-top: 10px;
+    border-radius: 5px;
+}
+
+/* Disable inactive options */
+.disabled {
+    color: gray;
+    pointer-events: none;
+}
+
+/* Bottom section */
+.bottom {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.settings,
+.internalDocuments,
+.help {
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.settings i,
+.internalDocuments i,
+.help i {
+    margin-right: 10px;
+}
+
+.settings:hover,
+.internalDocuments:hover,
+.help:hover {
+    background-color: #660708;
+}
+
+.settings:hover span,
+.help:hover span,
+.internalDocuments:hover span {
+    color: #ffffff;
+    font-weight: 500;
+}
+
+.settings:hover i,
+.help:hover i,
+.internalDocuments:hover i {
+    color: #001d39;
+}
+
+/* Highlight active button */
+.settings.active,
+.internalDocuments.active,
+.help.active {
+    background-color: #ba181b;
+}
+
+.settings.active span,
+.help.active span,
+.internalDocuments.active span {
+    color: #ffffff;
+    font-weight: 500;
+}
+
+.settings.active i,
+.help.active i,
+.internalDocuments.active i {
+    color: #ffffff;
+}
+
+
+
+/* Style for rename input field */
+.chatItem input {
+    background-color: #2b2f33;
+    /* Dark background for consistency with the theme */
+    color: white;
+    /* White text for good contrast */
+    border: 1px solid #3180c8;
+    /* Light blue border to match the theme */
+    border-radius: 5px;
+    /* Rounded corners to match the UI */
+    padding: 10px;
+    /* Some padding for better user experience */
+    font-size: 14px;
+    /* Font size to match other text */
+    font-weight: 500;
+    /* Same weight as regular chat titles */
+    width: 100%;
+    /* Make it fill the available space */
+    outline: none;
+    /* Remove the default blue outline */
+    transition: border-color 0.3s ease;
+    /* Smooth transition for hover and focus effects */
+}
+
+.chatItem input:focus {
+    border-color: #20588d;
+    /* Darker blue on focus to indicate interactivity */
+}
+
+.chatItem input::placeholder {
+    color: #81868b;
+    /* Slightly lighter color for placeholder text */
+}
+
+/* Highlight active chat */
+.chatItem.active {
+    background: rgba(186, 24, 27, 0.5);
+    border: 1px solid rgba(186, 24, 27, 0.6);
+    box-shadow: 0 4px 20px rgba(186, 24, 27, 0.4);
+    transform: translateY(-1px);
+}
+
+.chatItem.active a {
+    color: #ffffff;
+    font-weight: 600;
+}
+
+/* Folder section container */
+.folderSection {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Folder header and Add button */
+.folderHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.addFolderContainer {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    gap: 10px;
+    /* Space between the input and button */
+}
+
+.addFolderContainer input {
+    flex: 1;
+    /* Take up the remaining width */
+    background-color: #161a1d;
+    /* Dark background for consistency with the theme */
+    color: white;
+    /* White text for better contrast */
+    border: 1px solid #ba181b;
+    /* Border color matching the theme */
+    border-radius: 5px;
+    /* Rounded corners */
+    padding: 10px;
+    /* Add padding for better usability */
+    font-size: 14px;
+    /* Consistent font size */
+    outline: none;
+    /* Remove default outline */
+    transition: border-color 0.3s ease;
+    /* Smooth transition for border focus */
+}
+
+.addFolderContainer input:focus {
+    border-color: #ba181b;
+    /* Darker border color when focused */
+}
+
+.addTextButton {
+    background-color: #ba181b;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    /* More padding for better visual balance */
+    font-size: 14px;
+    /* Match font size for consistency */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    /* Smooth background transition */
+}
+
+.addTextButton:hover {
+    background-color: #660708;
+    /* Change background color on hover */
+}
+
+.addTextButton:disabled {
+    background-color: grey;
+    cursor: not-allowed;
+}
+
+/* Folder menu for renaming and deleting folders */
+.folderitem {
+    position: relative;
+    /* Ensures the menu is positioned relative to the folder */
+}
+
+.folderitem .menuButton {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5em;
+    cursor: pointer;
+    margin-left: auto;
+}
+
+.folderitem .menu {
+    position: absolute;
+    background-color: #161a1d;
+    border: 1px solid #ba181b;
+    border-radius: 5px;
+    top: 25px;
+    /* Adjust the vertical position */
+    right: 0px;
+    /* Align the menu with the three-dot button */
+    z-index: 100;
+    display: none;
+}
+
+.folderitem .menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.folderitem .menu li {
+    padding: 5px 10px;
+    cursor: pointer;
+    color: white;
+}
+
+.folderitem .menu li:hover {
+    background-color: #660708;
+}
+
+.folderitem .show-menu {
+    display: block;
+    /* Show the menu when active */
+}
+
+/* Styling for renaming folder input */
+.folderHeaderContainer input {
+    background-color: #0b090a;
+    /* Dark background consistent with theme */
+    color: white;
+    border: 1px solid #660708;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    width: 100%;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.folderHeaderContainer input:focus {
+    border-color: #660708;
+    /* Darker border color on focus */
+}
+
+.folderHeaderContainer span {
+    font-weight: 500;
+    color: white;
+    flex-grow: 1;
+    /* Ensures the folder name takes up the remaining space */
+}
+
+
+/* Move to folder select dropdown for folders */
+.folderitem .moveToFolder select {
+    background-color: #161a1d;
+    border: 1px solid #660708;
+    color: white;
+    padding: 5px;
+    margin-top: 10px;
+    border-radius: 5px;
+}
+
+/* Custom scrollbar for the chat list */
+.list::-webkit-scrollbar {
+    width: 4px;
+    /* Width of the scrollbar */
+}
+
+.list::-webkit-scrollbar-track {
+    background-color: #161a1d;
+    /* Background color of the scrollbar track */
+    border-radius: 4px;
+    /* Rounded corners for the track */
+}
+
+.list::-webkit-scrollbar-thumb {
+    background-color: #a4161a;
+    /* Color of the scrollbar thumb */
+    border-radius: 4px;
+    /* Rounded corners for the thumb */
+}
+
+.list::-webkit-scrollbar-thumb:hover {
+    background-color: #255a91;
+    /* Color of the thumb on hover */
+}
+
+/* Dropdown Button */
+.dropdownButton {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
+    padding: 8px 12px;
+    font-size: 14px;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.3s ease;
+    position: relative;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+/* Hover effect for dropdown button */
+.dropdownButton:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Dropdown Icon Rotation */
+.dropdownButton .fa-chevron-down {
+    transition: transform 0.3s ease;
+}
+
+.dropdownButton .rotate {
+    transform: rotate(180deg);
+}
+
+/* Dropdown Menu */
+.dropdownMenu {
+    position: absolute;
+    background: rgba(30, 30, 30, 0.9);
+    border-radius: 5px;
+    padding: 8px 0;
+    list-style: none;
+    margin-top: 5px;
+    min-width: 160px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    right: 0;
+    z-index: 10;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* Show dropdown when active */
+.dropdownMenu.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Dropdown Menu Items */
+.dropdownMenu li {
+    padding: 8px 12px;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+/* Hover effect for menu items */
+.dropdownMenu li:hover {
+    background: rgba(186, 24, 27, 0.3);
+    color: white;
+}
+
+/* Selected Filter Styling */
+.dropdownMenu li.active {
+    background: rgba(186, 24, 27, 0.5);
+    color: white;
+    font-weight: 600;
+}
+
+/* Hide dropdown when not active */
+.hidden {
+    display: none;
+}
+
+/* Chat List Header */
+.chatListHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    position: relative;
+}

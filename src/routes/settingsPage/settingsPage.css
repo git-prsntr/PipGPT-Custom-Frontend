@@ -1,0 +1,36 @@
+/* Main container */
+.settingsPage {
+    padding: 20px;
+    color: white;
+    overflow-y: auto;
+    height: 100%;
+
+    /* Glassmorphism Effect */
+    background: rgba(255, 255, 255, 0.1);
+    /* Semi-transparent background */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    /* Safari Support */
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    margin:0 10px;
+}
+
+/* Back button styling */
+.backButton {
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #ba181b;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+}
+
+/* Header */
+.settingsPage h1 {
+    font-size: 24px;
+    color:  #00CFA2;
+    margin-bottom: 20px;
+}

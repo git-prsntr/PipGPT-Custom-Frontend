@@ -1,0 +1,588 @@
+.dashboardpage {
+    height: 100%;
+    display: flex;
+    margin: 0 10px;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    /* Glassmorphism Effect */
+    background: rgba(255, 255, 255, 0.1);
+    /* Semi-transparent background */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    /* Safari Support */
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+}
+
+/* Adding red blobs using ::before and ::after */
+.dashboardpage::before,
+.dashboardpage::after {
+    content: "";
+    position: absolute;
+    opacity: 60%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(186, 24, 27, 0.5) 0%, rgba(102, 7, 8, 0.3) 100%);
+    border-radius: 80%;
+    filter: blur(90px);
+    z-index: -1;
+}
+
+/* First red blob - Top Left */
+.dashboardpage::before {
+    top: 10px;
+    left: -180px;
+}
+
+/* second red blob - Top Left */
+.dashboardpage::after {
+    bottom: -400px;
+    left: 800px;
+}
+
+.welcomeText {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* Center-aligns content horizontally */
+    justify-content: center;
+    /* Centers content vertically */
+    text-align: center;
+    /* Ensures text is center-aligned */
+    height: 150px;
+    /* Adjust height for proper vertical centering */
+    margin-top: 10px;
+    /* Adds some spacing from the top */
+}
+
+/* Style for h1 */
+.welcomeText h1 {
+    font-size: 42px;
+    /* Large font for prominence */
+    font-weight: 700;
+    /* Bold for emphasis */
+    color: #ffffff;
+    /* White text for visibility */
+    margin-bottom: 10px;
+    /* Space between h1 and h3 */
+}
+
+/* Style for h3 */
+.welcomeText h3 {
+    font-size: 18px;
+    /* Slightly smaller than h1 */
+    font-weight: 300;
+    /* Medium weight */
+    color: #cccccc;
+    /* Lighter text for contrast */
+}
+
+
+/* Top Bar containing greetings and toggle */
+.topBar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 95%;
+    margin: 20px 0;
+}
+
+
+.topBar h1 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #2b2d42;
+    margin: 0;
+    padding: 0;
+}
+
+.texts {
+    display: flex;
+    flex-direction: column;
+    width: 95%;
+    overflow-x: auto;
+    padding: 10px 0;
+}
+
+.horizontalScrollContainer {
+    display: flex;
+    gap: 30px;
+    overflow-x: auto;
+    padding-top: 10px;
+}
+
+.category {
+    flex-shrink: 0;
+    width: 23.4%;
+    background-color: #8d99ae;
+    border-style: solid;
+    border-color: #ba181b;
+    border-width: 2px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    text-align: left;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.category:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
+}
+
+.category h4 {
+    font-size: 16px;
+    color: #ffffff;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.categoryIcon {
+    width: 24px;
+    height: 24px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+
+.templateCard {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    color: #9E9FB6;
+    font-size: 14px;
+}
+
+.templateCard span {
+    padding: 10px;
+    background-color: #161a1d;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.templateCard span:hover {
+    background-color: #3180c8;
+    color: #ffffff;
+}
+
+
+/* Template Header */
+.templateHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.templateHeader h3 {
+    font-size: 16px;
+    color: #2b2d42;
+    margin: 0;
+    text-align: right;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 34px;
+    height: 20px;
+    margin-right: 10px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: 0.4s;
+    border-radius: 20px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 14px;
+    width: 14px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: 0.4s;
+    border-radius: 50%;
+}
+
+input:checked+.slider {
+    background-color: #660708;
+}
+
+input:checked+.slider:before {
+    transform: translateX(14px);
+}
+
+/* Tools Section */
+.toolsSection {
+    width: 95%;
+    margin: 20px 0;
+    /* Matches the vertical spacing */
+    color: #2b2d42;
+    transition: all 0.3s ease;
+    /* Smooth transition when moving up */
+}
+
+.toolsSection.hidden {
+    margin-top: 0;
+}
+
+.toolsSection h3 {
+    font-size: 18px;
+    color: #2b2d42;
+    ;
+    margin-bottom: 20px;
+}
+
+.toolsContainer {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.tool {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 23.7%;
+    height: 90px;
+    background-color: #161a1d;
+    border: 2px solid #ba181b;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.tool:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
+    background-color: #660708;
+}
+
+
+.toolContent {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 15px;
+    width: 90%;
+}
+
+.toolIcon {
+    background-color: #0b090a;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.toolIcon img {
+    width: 30px;
+    height: 30px;
+}
+
+.tool span {
+    font-size: 16px;
+    font-weight: 500;
+    color: #ba181b;
+}
+
+.tool:hover span {
+    color: #001D39;
+    font-weight: bold;
+}
+
+.toolsFooter {
+    margin-top: 20px;
+    text-align: right;
+}
+
+.toolsFooter span {
+    font-size: 14px;
+    color: #999999;
+}
+
+/* Form container with smooth dynamic height */
+.formcontainer {
+    width: 95%;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    position: relative;
+    min-height: 160px;
+    max-height: 400px;
+    overflow: hidden;
+    transition: height 0.3s ease-out;
+
+    /* Glassmorphism Effect */
+    background: rgba(82, 82, 82, 0.8);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Form inside container */
+.formcontainer form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Textarea with dynamic resizing */
+.formcontainer textarea {
+    width: 100%;
+    padding: 15px;
+    min-height: 50px;
+    max-height: 250px;
+    overflow-y: auto;
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    border-radius: 10px;
+    outline: none;
+    color: #ffffff;
+    font-size: 16px;
+    resize: none;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    transition: all 0.3s ease-out;
+}
+
+/* Expands when focused */
+.formcontainer textarea:focus {
+    background: rgba(255, 255, 255, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+/* Placeholder styling */
+.formcontainer textarea::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+    font-style: italic;
+}
+
+/* Button container with consistent spacing */
+.button-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    min-height: 60px;
+    /* Fixed space for buttons */
+}
+
+/* Submit button */
+.formcontainer button {
+    background: #ba181b;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    padding: 12px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s ease;
+}
+
+.formcontainer button:hover {
+    background: rgba(186, 24, 27, 0.8);
+}
+
+/* Font Awesome icon inside button */
+.formcontainer button i {
+    font-size: 18px;
+    color: white;
+}
+
+/* Choose Model with Glassmorphism */
+.choosemodel {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Model Toggle with Glassmorphism */
+.modelToggleSwitch {
+    display: flex;
+    background: rgba(255, 255, 255, 0.1);
+    /* Transparent effect */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    padding: 2px;
+    width: 350px;
+    justify-content: space-between;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* Individual Toggle Options */
+.modelToggleOption {
+    flex: 1;
+    text-align: center;
+    padding: 10px;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 14px;
+    transition: all 0.3s ease;
+    border-radius: 10px;
+}
+
+/* Active Model with Highlight */
+.modelToggleOption.active {
+    color: #ffffff;
+    background: rgba(186, 24, 27, 0.5);
+    border: 1px solid rgba(186, 24, 27, 0.6);
+    box-shadow: 0 4px 20px rgba(186, 24, 27, 0.4);
+    transform: translateY(-1px);
+}
+
+/* Model Icons */
+.modelIcon {
+    width: 20px;
+    /* Adjust size */
+    height: 20px;
+    margin-right: 8px;
+    /* Space between icon and text */
+    transition: opacity 0.3s ease;
+}
+
+/* Adjust styling for active state */
+.modelToggleOption.active .modelIcon {
+    opacity: 1;
+}
+
+
+.examplePromptssection {
+    width: 95%;
+    /* Matches form container width */
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    /* Ensures full width */
+    position: relative;
+}
+
+/* Flex container for header and button */
+.promptsHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.promptsHeader h3 {
+    font-size: 18px;
+    color: #ffffff;
+    text-align: left;
+}
+
+/* Ensures tiles fill available space */
+.promptsContainer {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    /* Even distribution */
+    width: 100%;
+}
+
+.promptTile {
+    flex: 1;
+    /* Allows tiles to take equal width */
+    min-width: 200px;
+    /* Prevents tiles from shrinking too much */
+    max-width: 280px;
+    /* Prevents tiles from stretching too much */
+    height: 80px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 10px;
+    padding: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.promptTile:hover {
+    transform: translateY(-3px);
+    background: rgba(186, 24, 27, 0.5);
+    border: 1px solid rgba(186, 24, 27, 0.6);
+}
+
+.promptIcon {
+    font-size: 18px;
+    color: #ffffff;
+}
+
+.promptText h4 {
+    font-size: 12px;
+    color: #ffffff;
+    margin-bottom: 5px;
+}
+
+.promptText p {
+    font-size: 12px;
+    color: #dddddd;
+    margin: 0;
+}
+
+/* Ensures Refresh Button is aligned to the right */
+.refreshPromptsButton {
+    background: transparent;
+    border: 2px solid #ffffff;
+    color: #ffffff;
+    font-size: 14px;
+    padding: 8px 15px;
+    border-radius: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+    align-self: flex-end;
+}
+
+.refreshPromptsButton:hover {
+    background: rgba(186, 24, 27, 0.7);
+    border-color: rgba(186, 24, 27, 1);
+}

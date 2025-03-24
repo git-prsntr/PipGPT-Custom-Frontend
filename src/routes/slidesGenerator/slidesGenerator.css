@@ -1,0 +1,253 @@
+/* Container for the Slides Generator */
+.slidesGenerator {
+    padding: 20px;
+    color: white;
+    overflow-y: auto;
+    height: 100%;
+    margin: 0 10px;
+    position: relative;
+    border-radius: 15px;
+    overflow-x: hidden;
+
+    /* Glassmorphism Effect */
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.slidesGenerator h1 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 20px;
+}
+
+/* Back Button */
+.backButton {
+    padding: 10px;
+    background: rgba(186, 24, 27, 0.5);
+    border: none;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.backButton:hover {
+    background: rgba(186, 24, 27, 0.8);
+}
+
+/* Instruction Input */
+.instructionInput {
+    width: 100%;
+    height: 100px;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    resize: none;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+.instructionInput:focus {
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+/* Buttons Styling */
+.generateButton,
+.downloadButton,
+.deleteSlideButton,
+.addSlideButton,
+.previewButton {
+    background: rgba(217, 34, 34, 0.79);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* Button Hover Effects */
+.generateButton:hover,
+.downloadButton:hover,
+.previewButton:hover {
+    background: rgba(186, 24, 27, 0.7);
+}
+
+.deleteSlideButton:hover {
+    background: rgba(200, 49, 49, 0.8);
+}
+
+.addSlideButton:hover {
+    background: rgba(49, 200, 109, 0.8);
+}
+
+/* Button Colors */
+.generateButton {
+    background: rgba(49, 128, 200, 0.6);
+}
+
+.downloadButton {
+    background: rgba(49, 128, 200, 0.6);
+}
+
+.deleteSlideButton {
+    background: rgba(200, 49, 49, 0.6);
+}
+
+.addSlideButton {
+    background: rgba(49, 200, 109, 0.6);
+}
+
+.previewButton {
+    background: rgba(245, 166, 35, 0.6);
+}
+
+/* Error Message */
+.error {
+    color: red;
+    margin-top: 10px;
+}
+
+/* Slides Editor */
+.slidesEditor {
+    margin-top: 20px;
+}
+
+/* Individual Slide Editor */
+.slideEditor {
+    margin-bottom: 20px;
+    border: 1px dashed rgba(255, 255, 255, 0.3);
+    padding: 15px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    position: relative;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+/* Slide Editor Inputs */
+.slideEditor input,
+.slideEditor textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    transition: all 0.3s ease;
+}
+
+.slideEditor textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+/* Input Focus Effect */
+.slideEditor input:focus,
+.slideEditor textarea:focus {
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+/* Button Row */
+.buttonRow {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+/* Editor Row */
+.editorRow {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Actions (Preview and Download) */
+.actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+/* Preview Modal */
+.previewModal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+/* Modal Content */
+.modalContent {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 10px;
+    width: 80%;
+    max-height: 80%;
+    overflow-y: auto;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+/* Modal Title */
+.modalContent h2 {
+    color: #3180c8;
+    font-size: 22px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Preview Slide */
+.previewSlide {
+    margin-bottom: 20px;
+    border: 1px dashed rgba(255, 255, 255, 0.3);
+    padding: 10px;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* Slide Title in Preview */
+.previewSlide h3 {
+    font-size: 18px;
+    color: rgba(245, 166, 35, 0.8);
+    margin-bottom: 10px;
+}
+
+/* Slide Content */
+.previewSlide p {
+    font-size: 16px;
+    color: white;
+}
+
+/* Close Modal Button */
+.closeModal {
+    background: rgba(200, 49, 49, 0.6);
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.closeModal:hover {
+    background: rgba(200, 49, 49, 0.8);
+}

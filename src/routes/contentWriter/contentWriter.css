@@ -1,0 +1,207 @@
+.contentWriter {
+    padding: 20px;
+    color: white;
+    height: 100%;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #3180c8 #0B1739;
+
+    /* Glassmorphism Effect */
+    background: rgba(255, 255, 255, 0.1);
+    /* Semi-transparent background */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    /* Safari Support */
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    margin:0 10px;
+}
+
+.contentWriter::-webkit-scrollbar {
+    width: 8px;
+}
+
+.contentWriter::-webkit-scrollbar-thumb {
+    background-color: #3180c8;
+    border-radius: 4px;
+}
+
+.contentWriter::-webkit-scrollbar-track {
+    background-color: #0B1739;
+}
+
+.contentWriter h1 {
+    font-size: 16px;
+    color:  #ffffff;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.backButton {
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #ba181b;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+}
+
+.contentInput {
+    width: 100%;
+    height: 120px;
+    margin-bottom: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #3180c8;
+    background-color: #0B1739;
+    color: white;
+    font-size: 16px;
+}
+
+.generatedContent {
+    width: 100%;
+    height: 240px;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #3180c8;
+    background-color: #0B1739;
+    color: white;
+    resize: vertical;
+    font-size: 16px;
+    scrollbar-width: thin;
+    scrollbar-color: #3180c8 #0B1739;
+}
+
+.generatedContent::-webkit-scrollbar {
+    width: 8px;
+}
+
+.generatedContent::-webkit-scrollbar-thumb {
+    background-color: #3180c8;
+    border-radius: 4px;
+}
+
+.generatedContent::-webkit-scrollbar-track {
+    background-color: #0B1739;
+}
+
+.charCount {
+    font-size: 14px;
+    color: #a3b7cc;
+    text-align: right;
+    margin-bottom: 10px;
+}
+
+.inputControls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.keywordsInput {
+    flex: 2;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #3180c8;
+    background-color: #0B1739;
+    color: white;
+    font-size: 16px;
+}
+
+.dropdown,
+.audienceButton {
+    flex: 1;
+    background-color: #0B1739;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #3180c8;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.audienceOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+.overlayContent {
+    background: #0B1739;
+    border: 1px solid #3180c8;
+    border-radius: 10px;
+    padding: 20px;
+    color: white;
+    width: 350px;
+    max-height: 400px;
+    overflow-y: auto;
+    text-align: center;
+    scrollbar-width: thin;
+    scrollbar-color: #3180c8 #0B1739;
+}
+
+.overlayContent::-webkit-scrollbar {
+    width: 8px;
+}
+
+.overlayContent::-webkit-scrollbar-thumb {
+    background-color: #3180c8;
+    border-radius: 4px;
+}
+
+.overlayContent::-webkit-scrollbar-track {
+    background-color: #0B1739;
+}
+
+.audienceList {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.dropdownItem {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    color: white;
+    font-size: 14px;
+}
+
+.audienceOkButton {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #3180c8;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.copyButton,
+.downloadButton {
+    background-color: #3180c8;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    height: 40px;
+}

@@ -1,0 +1,230 @@
+.newPrompt {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-between;
+    padding: 20px;
+    color: white;
+}
+
+.messageContainer {
+    flex: 1;
+    overflow-y: auto;
+    margin-bottom: 10px;
+
+    /* Updated Scrollbar Style */
+    scrollbar-width: thin;
+    scrollbar-color: #a4161a #161a1d;
+}
+
+.messageContainer::-webkit-scrollbar {
+    width: 8px;
+}
+
+.messageContainer::-webkit-scrollbar-thumb {
+    background-color: #a4161a;
+    border-radius: 4px;
+}
+
+.messageContainer::-webkit-scrollbar-track {
+    background-color: #0b1739;
+}
+
+.message {
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    max-width: 70%;
+    word-wrap: break-word;
+}
+
+.message.user {
+    display: inline-block;
+    /* Ensure the background only wraps the content */
+    color: white;
+    background-color: #660708;
+    align-self: flex-start;
+    text-align: right;
+    margin-right: 10px;
+    padding: 10px;
+    /* Keep the padding for proper spacing */
+    border-radius: 5px;
+    /* Ensure rounded corners */
+    max-width: 70%;
+    /* Limit width for long text */
+    word-wrap: break-word;
+    /* Ensure long words wrap properly */
+    font-size: 15px;
+}
+
+.message.assistant.loading {
+    background-color: #0b090a;
+    /* Match assistant background */
+    color: #262b2e;
+    /* Subtle color for loading text */
+    text-align: center;
+    padding: 10px;
+    border-radius: 5px;
+    max-width: 98%;
+    align-self: flex-end;
+    margin-bottom: 10px;
+    font-style: italic;
+    /* Make it visually distinct */
+}
+
+.message.assistant {
+    display: block;
+    /* Default for assistant messages */
+    background-color: #1b2b4f;
+    align-self: flex-end;
+    text-align: left;
+    padding-left: 30px;
+    padding-right: 30px;
+    /* Keep padding for proper spacing */
+    border-radius: 5px;
+    max-width: 98%;
+    word-wrap: break-word;
+
+    /* Improved Assistant Text Formatting */
+    line-height: 1.6;
+    font-size: 15px;
+}
+
+
+.formContainerNewPrompt {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.inputWrapper {
+    display: flex;
+    align-items: center;
+    height: 60px;
+    width: 100%;
+    max-width: 800px;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+    padding: 5px;
+
+    /* Glassmorphism Effect */
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.styledInput {
+    flex: 1;
+    padding: 12px 15px;
+    font-size: 16px;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: white;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+/* Placeholder styling */
+.styledInput::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+    font-style: italic;
+}
+
+/* Focus Effect */
+.styledInput:focus {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 10px;
+}
+
+/* Submit Button with Glassmorphism */
+.submitButtonNewPrompt {
+    background: #ba181b;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    padding: 12px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s ease;
+}
+
+/* Icon inside the submit button */
+.submitButton i {
+    width: 22px;
+    height: 22px;
+    filter: brightness(1.2);
+}
+
+
+.toggleWrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    /* Space between toggle and label */
+    margin-bottom: 10px;
+    /* Add spacing below the toggle */
+    margin-right: 20px;
+    ;
+}
+
+.toggleSwitch {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 20px;
+}
+
+.toggleSwitch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: 0.4s;
+    border-radius: 20px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 14px;
+    width: 14px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: 0.4s;
+    border-radius: 50%;
+}
+
+input:checked+.slider {
+    background-color: #00CFA2;
+    /* Active background color */
+}
+
+input:checked+.slider:before {
+    transform: translateX(20px);
+    /* Move the toggle knob */
+}
+
+.toggleLabel {
+    font-size: 14px;
+    color: white;
+    /* Adjust text color */
+    font-weight: 500;
+}
