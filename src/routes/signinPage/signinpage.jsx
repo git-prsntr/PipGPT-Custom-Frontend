@@ -61,7 +61,7 @@ const Signinpage = () => {
                     <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required />
                     <button type="submit">Sign In</button>
                 </form>
-                <p><Link to="/reset-password">Forgot Password?</Link></p>
+                <p><Link to="/resetpassword">Forgot Password?</Link></p>
                 <p>Don't have an account? <Link to="/sign-up">Sign Up</Link></p>
             </div>
 
