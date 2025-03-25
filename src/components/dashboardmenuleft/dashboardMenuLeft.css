@@ -1,0 +1,152 @@
+/* Dashboard Left Menu with Glassmorphism */
+.dashboardMenuLeft {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 20px 10px;
+    overflow: hidden;
+    position: relative;
+
+   /* Glassmorphism Effect */
+   background: var(--glassmorphism-background);
+   /* Semi-transparent background */
+   backdrop-filter: blur(10px);
+   -webkit-backdrop-filter: blur(10px);
+   /* Safari Support */
+   border-radius: 15px;
+   border: var(--glassmorphism-border);
+   box-shadow: var(--glassmorphism-box-shadow);
+}
+
+/* Adding red blobs using ::before and ::after */
+.dashboardMenuLeft::before,
+.dashboardMenuLeft::after {
+    content: "";
+    position: absolute;
+    opacity: 60%;
+    width: 500px;
+    height: 400px;
+    background: var(--glassmorphism-blob-background);
+    border-radius: 80%;
+    filter: blur(90px);
+    z-index: -1;
+    animation: blobAnimation 10s infinite alternate ease-in-out;
+}
+
+/* First red blob - Top Left */
+.dashboardMenuLeft::before {
+    top: 80px;
+    left: -250px;
+    animation-delay: 0s;
+}
+
+/* Second red blob - Bottom Right */
+.dashboardMenuLeft::after {
+    bottom: -40px;
+    left: 180px;
+    animation-delay: 2s;
+}
+
+/* Keyframes for smooth floating movement */
+@keyframes blobAnimation {
+    0% {
+        transform: translate(0, 0) scale(1);
+    }
+    50% {
+        transform: translate(20px, -20px) scale(1.1);
+    }
+    100% {
+        transform: translate(-20px, 20px) scale(1);
+    }
+}
+
+/* Glassmorphic horizontal line */
+hr {
+    border: none;
+    height: 2px;
+    background: var(--hr-background);
+    border-radius: 5px;
+    margin: 10px 0;
+    backdrop-filter: blur(5px);
+}
+
+/* Title styling with subtle glow */
+.title {
+    font-weight: 400;
+    font-size: 14px;
+    margin-bottom: 10px;
+    color: var(--menu-title);
+    letter-spacing: 1px;
+}
+
+/* General styling for menu items */
+.menuItem {
+    padding: 10px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Menu icon styling */
+.menuItem i {
+    margin-right: 10px;
+    color: var(--inactive-icon);
+    transition: color 0.3s ease;
+}
+
+/* Menu item text */
+.menuItem span {
+    font-size: 14px;
+    color: var(--inactive-heading);
+    transition: color 0.3s ease;
+}
+
+/* Hover effect with Glassmorphism */
+.menuItem:hover {
+    background: var(--feature-hover-background);
+    border: var(--feature-hover-border);
+    box-shadow: var(--feature-hover-box-shadow);
+    transform: translateY(-2px);
+}
+
+.menuItem:hover span {
+    color: #ffffff;
+    font-weight: 500;
+}
+
+.menuItem:hover i {
+    color: #ffffff;
+}
+
+/* Active button with enhanced Glassmorphism */
+.menuItem.active {
+    background: var(--menu-item-active-background);
+    border: var(--menu-item-active-border);
+    box-shadow: var(--menu-item-active-box-shadow);
+    transform: translateY(-1px);
+}
+
+.menuItem.active span {
+    color: var(--active-heading);
+    font-weight: 600;
+}
+
+.menuItem.active i {
+    color: var(--active-icon);
+}
+
+/* Consistent spacing between Tools and Bottom */
+.tools,
+.bottom {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+/* Fixing bottom alignment */
+.bottom {
+    margin-top: auto;
+}

@@ -1,0 +1,203 @@
+.newPrompt {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-between;
+    padding: 20px;
+    color: white;
+}
+
+.messageContainer {
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 0 10px;
+  }
+  
+  /* Base style for messages */
+  .message {
+    padding: 15px 20px;
+    border-radius: 20px;
+    max-width: 70%;
+    word-wrap: break-word;
+    margin-bottom: 10px;
+    display: inline-block;
+  }
+  
+  /* User messages — align right */
+  .message.user {
+    align-self: flex-end;
+    background-color: var(--menu-item-active-background);
+    color: var(--active-heading);
+    text-align: right;
+  
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Assistant messages — align left */
+  .message.assistant {
+    align-self: flex-start;
+    background-color: var(--feature-background);
+    color: var(--inactive-heading);
+    text-align: left;
+  
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Loading assistant message */
+  .message.assistant.loading {
+    text-align: center;
+    font-style: italic;
+    background-color: #1b2b4f;
+    color: #7a92b0;
+    border-radius: 10px;
+    max-width: 80%;
+    align-self: center;
+  }
+  
+
+.formContainerNewPrompt {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.inputWrapper {
+    display: flex;
+    align-items: center;
+    height: 60px;
+    width: 100%;
+    max-width: 800px;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+    padding: 5px;
+
+    /* Glassmorphism Effect */
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.styledInput {
+    flex: 1;
+    padding: 12px 15px;
+    font-size: 16px;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: white;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+/* Placeholder styling */
+.styledInput::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+    font-style: italic;
+}
+
+/* Focus Effect */
+.styledInput:focus {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 10px;
+}
+
+/* Submit Button with Glassmorphism */
+.submitButtonNewPrompt {
+    background: #ba181b;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    padding: 12px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s ease;
+}
+
+/* Icon inside the submit button */
+.submitButton i {
+    width: 22px;
+    height: 22px;
+    filter: brightness(1.2);
+}
+
+
+.toggleWrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    /* Space between toggle and label */
+    margin-bottom: 10px;
+    /* Add spacing below the toggle */
+    margin-right: 20px;
+    ;
+}
+
+.toggleSwitch {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 20px;
+}
+
+.toggleSwitch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: 0.4s;
+    border-radius: 20px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 14px;
+    width: 14px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: 0.4s;
+    border-radius: 50%;
+}
+
+input:checked+.slider {
+    background-color: #00CFA2;
+    /* Active background color */
+}
+
+input:checked+.slider:before {
+    transform: translateX(20px);
+    /* Move the toggle knob */
+}
+
+.toggleLabel {
+    font-size: 14px;
+    color: white;
+    /* Adjust text color */
+    font-weight: 500;
+}

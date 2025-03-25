@@ -1,0 +1,25 @@
+/* Main container */
+.aboutPage {
+    padding: 20px;
+    color: white;
+    overflow-y: auto;
+    max-height: 90vh;
+}
+
+/* Back button styling */
+.backButton {
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #3180c8;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+}
+
+/* Header */
+.aboutPage h1 {
+    font-size: 24px;
+    color:  #00CFA2;
+    margin-bottom: 20px;
+}

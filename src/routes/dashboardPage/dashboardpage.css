@@ -1,0 +1,339 @@
+.dashboardpage {
+    height: 100%;
+    display: flex;
+    margin: 0 10px;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    /* Glassmorphism Effect */
+    background: var(--glassmorphism-background);
+    /* Semi-transparent background */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    /* Safari Support */
+    border-radius: 15px;
+    border: var(--glassmorphism-border);
+    box-shadow: var(--glassmorphism-box-shadow);
+    overflow: hidden;
+}
+
+/* Adding red blobs using ::before and ::after */
+.dashboardpage::before,
+.dashboardpage::after {
+    content: "";
+    position: absolute;
+    opacity: 60%;
+    width: 600px;
+    height: 600px;
+    background: var(--glassmorphism-blob-background);
+    border-radius: 80%;
+    filter: blur(90px);
+    z-index: -1;
+}
+
+/* First red blob - Top Left */
+.dashboardpage::before {
+    top: 10px;
+    left: -180px;
+}
+
+/* second red blob - Top Left */
+.dashboardpage::after {
+    bottom: -400px;
+    left: 800px;
+}
+
+.welcomeText {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* Center-aligns content horizontally */
+    justify-content: center;
+    /* Centers content vertically */
+    text-align: center;
+    /* Ensures text is center-aligned */
+    height: 150px;
+    /* Adjust height for proper vertical centering */
+    margin-top: 10px;
+    /* Adds some spacing from the top */
+}
+
+/* Style for h1 */
+.welcomeText h1 {
+    font-size: 42px;
+    /* Large font for prominence */
+    font-weight: 700;
+    /* Bold for emphasis */
+    color: var(--menu-title);
+    /* White text for visibility */
+    margin-bottom: 10px;
+    /* Space between h1 and h3 */
+}
+
+/* Style for h3 */
+.welcomeText h3 {
+    font-size: 18px;
+    /* Slightly smaller than h1 */
+    font-weight: 300;
+    /* Medium weight */
+    color: var(--menu-sub-heading);
+    /* Lighter text for contrast */
+}
+
+/* Form container with smooth dynamic height */
+.formcontainer {
+    width: 95%;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    position: relative;
+    min-height: 160px;
+    max-height: 400px;
+    overflow: hidden;
+    transition: height 0.3s ease-out;
+
+    /* Glassmorphism Effect */
+    background: var(--glassmorphism-background);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: var(--glassmorphism-border);
+    box-shadow: var(--glassmorphism-box-shadow);
+}
+
+/* Form inside container */
+.formcontainer form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Textarea with dynamic resizing */
+.formcontainer textarea {
+    width: 100%;
+    padding: 15px;
+    min-height: 50px;
+    max-height: 250px;
+    overflow-y: auto;
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    border-radius: 10px;
+    outline: none;
+    color: #ffffff;
+    font-size: 16px;
+    resize: none;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    transition: all 0.3s ease-out;
+}
+
+/* Expands when focused */
+.formcontainer textarea:focus {
+    background: rgba(255, 255, 255, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+/* Placeholder styling */
+.formcontainer textarea::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+    font-style: italic;
+}
+
+/* Button container with consistent spacing */
+.button-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    min-height: 60px;
+    /* Fixed space for buttons */
+}
+
+/* Submit button */
+.formcontainer button {
+    background: var(--primary-button-background);
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    padding: 12px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s ease;
+}
+
+.formcontainer button:hover {
+    background: var(--primary-button-hover-background);
+}
+
+/* Font Awesome icon inside button */
+.formcontainer button i {
+    font-size: 18px;
+    color: white;
+}
+
+/* Choose Model with Glassmorphism */
+.choosemodel {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Model Toggle with Glassmorphism */
+.modelToggleSwitch {
+    display: flex;
+    background: var(--feature-background);
+    /* Transparent effect */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: var(--feature-border);
+    box-shadow: var(--feature-box-shadow);
+    border-radius: 10px;
+    padding: 2px;
+    width: 400px;
+    justify-content: space-between;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* Individual Toggle Options */
+.modelToggleOption {
+    flex: 1;
+    text-align: center;
+    padding: 10px;
+    color: var(--inactive-heading);
+    font-size: 14px;
+    transition: all 0.3s ease;
+    border-radius: 10px;
+}
+
+/* Active Model with Highlight */
+.modelToggleOption.active {
+    color: white;
+    background: var(--primary-button-background);
+    border: var(--menu-item-active-border);
+    box-shadow: var(--menu-item-active-box-shadow);
+    font-weight: 700;
+}
+
+/* Model Icons */
+.modelIcon {
+    width: 20px;
+    /* Adjust size */
+    height: 20px;
+    margin-right: 8px;
+    /* Space between icon and text */
+    transition: opacity 0.3s ease;
+}
+
+/* Adjust styling for active state */
+.modelToggleOption.active .modelIcon {
+    opacity: 1;
+}
+
+
+.examplePromptssection {
+    width: 95%;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    position: relative;
+}
+
+/* Flex container for header and button */
+.promptsHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.promptsHeader h3 {
+    font-size: 14px;
+    color: var(--menu-title);
+    text-align: left;
+    font-weight: 400;
+}
+
+/* Ensures tiles fill available space */
+.promptsContainer {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    /* Even distribution */
+    width: 100%;
+}
+
+.promptTile {
+    flex: 1;
+    min-width: 200px;
+    max-width: 280px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--feature-background);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 10px;
+    padding: 12px;
+    border: var(--feature-border);
+    box-shadow: var(--feature-box-shadow);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.promptTile:hover {
+    transform: translateY(-3px);
+    background: var(--feature-hover-background);
+    border: var(--feature-hover-border);
+    box-shadow: var(--feature-hover-box-shadow);
+}
+
+.promptIcon {
+    font-size: 18px;
+    color: var(--inactive-icon);
+}
+
+
+.promptText h4 {
+    font-size: 12px;
+    color: var(--inactive-heading);
+    margin-bottom: 10px;
+}
+
+.promptText p {
+    font-size: 12px;
+    color: var(--menu-sub-heading);
+    margin: 0;
+}
+
+/* Ensures Refresh Button is aligned to the right */
+.refreshPromptsButton {
+    background: transparent;
+    border: var(--feature-border);
+    color: var(--active-heading);
+    box-shadow: var(--feature-hover-box-shadow);
+    font-size: 14px;
+    padding: 8px 15px;
+    border-radius: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+    align-self: flex-end;
+}
+
+.refreshPromptsButton:hover {
+    background: rgba(186, 24, 27, 0.7);
+    border-color: rgba(186, 24, 27, 1);
+}

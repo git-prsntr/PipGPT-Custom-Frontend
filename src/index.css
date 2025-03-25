@@ -1,0 +1,101 @@
+:root {
+
+  /* Colors */
+  --primary-color: #57CBEC;
+  --primary-hover-color: #45a8c4;
+  --border-color: #cccccc;
+  --background-opacity: rgba(87, 203, 236, 0.5);
+
+  /* Glassmorphism CSS*/
+  --glassmorphism-background: rgba(255, 255, 255, 0.1);
+  --glassmorphism-border: 1px solid rgba(255, 255, 255, 0.2);
+  --glassmorphism-box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  --glassmorphism-blob-background: radial-gradient(circle, rgba(0, 191, 255, 0.5) 0%, rgba(102, 7, 8, 0.3) 100%);
+
+  /* Buttons CSS */
+  --primary-button-background: #57CBEC;
+  --primary-button-hover-background:#3794ae;
+
+  /* Feature Sections CSS */
+  --feature-background:rgba(255, 255, 255, 0.1);
+  --feature-border:1px solid rgba(255, 255, 255, 0.2);;
+  --feature-box-shadow:0 4px 10px rgba(0, 0, 0, 0.2);
+  --feature-hover-background:#3794ae;
+  --feature-hover-border:1px solid rgba(87, 203, 236, 0.3);
+  --feature-hover-box-shadow:0 4px 15px rgba(29, 146, 218, 0.3);
+  --menu-item-active-background:rgba(48, 165, 197, 0.5);
+  --menu-item-active-border:1px solid rgba(87, 203, 236, 0.3);
+  --menu-item-active-box-shadow:0 4px 15px rgba(29, 146, 218, 0.3);
+
+  /*Sub Menu CSS*/
+  --sub-menu-background:#161a1d;
+  --sub-menu-border:1px solid #57CBEC;
+
+  /* Titles and Texts */
+  --menu-title: #a3e1f2;
+  --menu-sub-title:#cccccc;
+  --inactive-heading:rgba(255, 255, 255, 0.8);
+  --inactive-icon:rgba(255, 255, 255, 0.6);
+  --active-heading:#57CBEC;
+  --active-icon:#57CBEC;
+  --sub-heading:#666;
+
+  /*ScrollBar*/
+  --scrollbar-track-background:#161a1d;
+  --scrollbar-background:#57CBEC;
+  
+  /* Chat Styles */
+}
+
+/* Global Scroll Bar */
+
+::-webkit-scrollbar {
+  width: 5px; 
+}
+
+/* Track (the background of the scrollbar) */
+::-webkit-scrollbar-track {
+  background: var(--scrollbar-track-background);
+  border-radius: 10px;
+}
+
+/* Handle (the draggable part of the scrollbar) */
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-background);
+  border-radius: 10px;
+  transition: background 0.3s ease;
+}
+
+.user-message-style {
+  align-self: flex-start;
+  background-color: var(--feature-background);
+  color: #d3d3d3;
+  text-align: right;
+}
+
+.header-style {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--menu-title); 
+  margin-bottom: 20px;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #ffffff;
+  color: #ececec;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+a{
+  text-decoration: none;
+  color: inherit;
+}
+
+

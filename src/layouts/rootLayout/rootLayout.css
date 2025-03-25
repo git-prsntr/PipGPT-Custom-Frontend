@@ -1,0 +1,47 @@
+.rootLayout {
+    background: #0b090a;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+
+    header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin: 10px 20px;
+
+        .left, .right {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+
+            img {
+                width: auto;
+                max-height: 40px;
+            }
+        }
+
+        .right {
+            gap: 20px;
+            
+            img {
+                width: 100px;
+                height: auto;
+            }
+        }
+
+        .user {
+            display: flex;
+            align-items: center;
+        }
+    }
+
+    main {
+        flex: 1;
+        overflow: hidden;
+    }
+}

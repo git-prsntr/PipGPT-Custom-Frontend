@@ -1,0 +1,85 @@
+/* Main container */
+.reportGenerator {
+    padding: 20px;
+    color: white;
+    overflow-y: auto;
+    max-height: 90vh;
+}
+
+/* Back button styling */
+.backButton {
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #3180c8;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+}
+
+/* Header */
+.reportGenerator h1 {
+    font-size: 24px;
+    color:  #00CFA2;
+    margin-bottom: 20px;
+}
+
+/* File upload section */
+.fileUploadSection {
+    margin-bottom: 20px;
+}
+
+.fileUploadLabel {
+    display: block;
+    margin-bottom: 10px;
+    color: #ccc;
+}
+
+#fileInput {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #3180c8;
+    border-radius: 5px;
+    background-color: #0B1739;
+    color: white;
+}
+
+/* File summary */
+.fileSummary {
+    margin: 10px 0;
+    color: #ccc;
+}
+
+/* Buttons */
+.generateButton,
+.downloadButton {
+    background-color: #3180c8;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 10px 0;
+}
+
+/* Error message */
+.error {
+    color: red;
+    margin-top: 10px;
+}
+
+/* Report output */
+.reportOutput {
+    margin-top: 20px;
+    background-color: #0B1739;
+    padding: 15px;
+    border-radius: 5px;
+    border: 1px solid #3180c8;
+    color: white;
+}
+
+.reportOutput pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: "Courier New", Courier, monospace;
+}

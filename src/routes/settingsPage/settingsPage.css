@@ -1,0 +1,171 @@
+/* Main container */
+.settingsPage {
+    padding: 20px;
+    overflow-y: auto;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 0 10px;
+  
+    /* Glassmorphism Effect */
+    background: var(--glassmorphism-background);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 15px;
+    border: var(--glassmorphism-border);
+    box-shadow: var(--glassmorphism-box-shadow);
+  }
+  
+  .settingsHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+  
+  /* === Branding Section === */
+  
+  .brandingSettings {
+    padding: 20px 0;
+    width: 100%;
+  }
+  
+  .brandingTitle {
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--menu-title);
+    margin-bottom: 20px;
+  }
+  
+  .brandingGrid {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 40px;
+    width: 100%;
+    flex-wrap: wrap;
+  }
+  
+  /* Shared layout for sections */
+  .companyTitleInput,
+  .logoUploader,
+  .themeSelector {
+    flex: 1;
+    min-width: 250px;
+    max-width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  /* === Company Title === */
+  .companyTitleInput input {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background-color: rgba(255, 255, 255, 0.05);
+    color: white;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+  }
+  
+  /* === Logo Uploader === */
+  .logoUploader {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .logoRow {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+  
+  .logoPreview {
+    height: auto;
+    max-height: 40px;
+    width: auto;
+    max-width: 120px;
+    object-fit: contain;
+  }
+  
+  
+  
+  /* === Theme Selector === */
+  .selectorLabel {
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--inactive-heading);
+    display: block;
+  }
+  
+  .themeDropdown {
+    position: relative;
+    width: 100%;
+  }
+  
+  .dropdownToggle {
+    width: 100%;
+    height: 40px;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 12px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    color: white;
+    font-weight: 500;
+    transition: background 0.3s ease;
+  }
+  
+  .arrow {
+    font-size: 12px;
+  }
+  
+  .selectedColor {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: white;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    margin-right: 8px;
+    visibility: hidden;
+  }
+  
+  .dropdownGrid {
+    margin-top: 8px;
+    background-color: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 10px;
+    border-radius: 10px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    position: absolute;
+    width: 100%;
+    z-index: 10;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  }
+  
+  .swatch {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    transition: transform 0.2s ease;
+  }
+  
+  .swatch:hover {
+    transform: scale(1.1);
+  }
+  

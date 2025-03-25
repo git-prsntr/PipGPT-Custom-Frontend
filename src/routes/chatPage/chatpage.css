@@ -1,0 +1,39 @@
+.chatpage {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    position: relative;
+    padding: 20px 0;
+    margin: 0 10px;
+    /* Glassmorphism Effect */
+    background: rgba(255, 255, 255, 0.1);
+    /* Semi-transparent background */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    /* Safari Support */
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+}
+
+.titleSection {
+    display: flex; /* Enables flexbox for horizontal alignment */
+    align-items: center; /* Ensures vertical centering for all items */
+    justify-content: space-between; /* Adds space between button, title, and h3 */
+    margin-bottom: 10px; /* Adds spacing below the container */
+    gap: 10px; /* Adds space between the back button and the title */
+    padding:0 20px;
+}
+
+
+
+.titleSection h3 {
+    margin-right: 20px;
+    font-size: 10px;
+    font-weight: normal;
+    color: #cecece; /* Adjust text color */
+    white-space: nowrap; /* Prevent wrapping */
+    line-height: 1; /* Ensures alignment with the title */
+}

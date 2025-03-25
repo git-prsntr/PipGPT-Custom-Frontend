@@ -1,0 +1,161 @@
+.internalDocumentsPage {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    color: #fff;
+  }
+  
+  .backButton {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-bottom: 20px;
+  }
+  
+  h1 {
+    color: #00CFA2;
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .uploadSection {
+    border: 2px dashed #ccc;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+    margin-bottom: 10px;
+    color: #ccc;
+    cursor: pointer;
+  }
+  
+  .uploadSection:hover {
+    border-color: #007bff;
+  }
+  
+  .fileName {
+    margin-top: 10px;
+    color: #ccc;
+    font-size: 14px;
+  }
+  
+  .uploadButton {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    display: block;
+    margin: 15px auto;
+  }
+  
+  .uploadButton:disabled {
+    background-color: #666;
+    cursor: not-allowed;
+  }
+  
+  .documentsList {
+    margin-top: 30px;
+  }
+  
+  h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .documentItem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #444;
+    padding: 5px 0;
+  }
+  
+  .documentName {
+    flex: 1;
+    text-align: left;
+    margin-right: 10px;
+    color: #ccc;
+    font-size: 16px;
+  }
+
+  .documentLink {
+    cursor: pointer; /* Changes cursor to a pointer */
+    text-decoration: underline; /* Optional: Adds underline to indicate it's clickable */
+  }
+  
+  .documentLink:hover {
+    text-decoration: none; /* Optional: Removes underline on hover */
+  }
+  
+  
+  .downloadButton,
+  .deleteButton {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 100px;
+    margin-right: 5px;
+  }
+  
+  .deleteButton {
+    background-color: #dc3545;
+  }
+  
+
+  .modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .modalContent {
+    position: relative;
+    width: 80%;
+    height: 80%;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+  }
+  
+  .closeButton {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: red;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 50%;
+  }
+  
+  .pdfViewer {
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+  
