@@ -1,25 +1,26 @@
-/* Main container */
 .aboutPage {
     padding: 20px;
-    color: white;
+    height: 100%;
     overflow-y: auto;
-    max-height: 90vh;
-}
-
-/* Back button styling */
-.backButton {
+    margin: 0 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  
+    /* Glassmorphism Effect */
+    background: var(--glassmorphism-background);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 15px;
+    border: var(--glassmorphism-border);
+    box-shadow: var(--glassmorphism-box-shadow);
+  }
+  
+  .aboutPage p {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--inactive-heading);
     margin-bottom: 20px;
-    padding: 10px;
-    background-color: #3180c8;
-    border: none;
-    border-radius: 5px;
-    color: white;
-    cursor: pointer;
-}
-
-/* Header */
-.aboutPage h1 {
-    font-size: 24px;
-    color:  #00CFA2;
-    margin-bottom: 20px;
-}
+    white-space: pre-line;
+  }
+  

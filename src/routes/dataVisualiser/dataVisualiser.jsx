@@ -1,3 +1,8 @@
+/**
+ * @File Datavisualiser Component
+ * @description This component allows users to upload CSV files, select data columns, and generate interactive charts using chart.js
+ */
+
 import React, { useState } from "react";
 import Papa from "papaparse";
 import { Chart, registerables } from "chart.js";
@@ -10,6 +15,11 @@ import { useNavigate } from "react-router-dom";
 // Register all Chart.js components
 Chart.register(...registerables);
 
+/**
+ * @component DataVisualiser
+ * @description Enables users to upload a CSV file, select X and Y axes, and generate different types of charts.
+ * @returns {JSX.Element} The Data Visualiser component.
+ */
 const DataVisualiser = () => {
     const navigate = useNavigate();
     const [fileData, setFileData] = useState([]);
@@ -126,10 +136,7 @@ const DataVisualiser = () => {
 
     return (
         <div className="dataVisualiser">
-            <button className="backButton" onClick={handleBackClick}>
-                ← Back to Dashboard
-            </button>
-            <h1>Data Visualiser</h1>
+            <h1 className="header-style">Data Visualiser</h1>
 
             <div
                 className={`dropZone ${dragActive ? "active" : ""}`}

@@ -1,7 +1,18 @@
+/**
+ * @File Report Generator Component
+ * @description This component allows users to uplaod CSV files and generate professional reports based on the data using AI.
+ */
+
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { generateCompletion } from "../../lib/openai"; 
 import "./reportGenerator.css";
+
+/**
+ * @component ReportGenerator
+ * @description Enables users to upload a CSV file and generate a professional report from the data.
+ * @returns {JSX.Element} The ReportGenerator component.
+ */
 
 const ReportGenerator = () => {
     const navigate = useNavigate();
@@ -83,10 +94,7 @@ const ReportGenerator = () => {
 
     return (
         <div className="reportGenerator">
-            <button className="backButton" onClick={handleBackClick}>
-                ← Back to Dashboard
-            </button>
-            <h1>Generate Professional Report</h1>
+            <h1 className="header-style">Generate Professional Report</h1>
 
             <div className="fileUploadSection">
                 <label htmlFor="fileInput" className="fileUploadLabel">

@@ -40,10 +40,6 @@ const InternalDocuments = () => {
     }
   };
 
-  const handleBackClick = () => {
-    navigate("/dashboard");
-  };
-
   const handleFileChange = (e) => {
     setSelectedFile(e.target.files[0]);
   };
@@ -99,10 +95,7 @@ const InternalDocuments = () => {
 
   return (
     <div className="internalDocumentsPage">
-      <button className="backButton" onClick={handleBackClick}>
-        ← Back to Dashboard
-      </button>
-      <h1>Internal Documents</h1>
+      <h1 className="header-style">Internal Documents</h1>
 
       <div
         className="uploadSection"

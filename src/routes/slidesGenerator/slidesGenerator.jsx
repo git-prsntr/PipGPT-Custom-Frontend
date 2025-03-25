@@ -1,8 +1,19 @@
+/**
+ * @Files Slides Generator Component
+ * @Description This component allows users to generate and edit presentation slides based on AI-generated content.
+ */
+
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import PptxGenJS from "pptxgenjs";
 import { generateCompletion } from "../../lib/openai";
 import "./slidesGenerator.css";
+
+/**
+ * @component SlidesGenerator
+ * @description Enables users to generate, edit, and download presentation slides.
+ * @returns {JSX.Element} The SlidesGenerator component.
+ */
 
 const SlidesGenerator = () => {
     const navigate = useNavigate();
@@ -122,10 +133,7 @@ const SlidesGenerator = () => {
 
     return (
         <div className="slidesGenerator">
-            <button className="backButton" onClick={handleBackClick}>
-                ← Back to Dashboard
-            </button>
-            <h1>Generate Presentation Slides</h1>
+            <h1 className="header-style">Generate Presentation Slides</h1>
 
             {/* Instruction Input */}
             <textarea

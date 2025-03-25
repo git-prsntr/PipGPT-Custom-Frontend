@@ -1,7 +1,19 @@
+/**
+ * @file ContentWriter Component
+ * @description This component allows users to generate AI-assisted content based on a draft, keywords, selected platform, and audience preferences.
+ */
+
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { generateCompletion } from "../../lib/openai"; // Assumes you have openai.js for OpenAI calls
 import "./contentWriter.css";
+
+
+/**
+ * @component ContentWriter
+ * @description Provides a UI for users to generate AI-powered content based on input fields.
+ * @returns {JSX.Element} The Content Writer component.
+ */
 
 const ContentWriter = () => {
     const navigate = useNavigate();
@@ -77,10 +89,7 @@ Provide only the generated content, without any additional commentary or explana
 
     return (
         <div className="contentWriter">
-            <button className="backButton" onClick={handleBackClick}>
-                ← Back to Dashboard
-            </button>
-            <h1>Content Writer</h1>
+            <h1 className="header-style">Content Writer</h1>
 
             <textarea
                 className="contentInput"

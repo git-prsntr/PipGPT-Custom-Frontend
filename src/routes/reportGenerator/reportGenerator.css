@@ -3,25 +3,29 @@
     padding: 20px;
     color: white;
     overflow-y: auto;
-    max-height: 90vh;
+    height: 100%;
+    /* Glassmorphism Effect */
+    background: var(--glassmorphism-background);
+    /* Semi-transparent background */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    /* Safari Support */
+    border-radius: 15px;
+    border: var(--glassmorphism-border);
+    box-shadow: var(--glassmorphism-box-shadow);
+    margin:0 10px;
+
 }
 
 /* Back button styling */
 .backButton {
     margin-bottom: 20px;
     padding: 10px;
-    background-color: #3180c8;
+    background-color: #ba181b;
     border: none;
     border-radius: 5px;
     color: white;
     cursor: pointer;
-}
-
-/* Header */
-.reportGenerator h1 {
-    font-size: 24px;
-    color:  #00CFA2;
-    margin-bottom: 20px;
 }
 
 /* File upload section */
@@ -40,7 +44,7 @@
     padding: 10px;
     border: 1px solid #3180c8;
     border-radius: 5px;
-    background-color: #0B1739;
+    background-color: var(--feature-background);
     color: white;
 }
 
@@ -53,7 +57,7 @@
 /* Buttons */
 .generateButton,
 .downloadButton {
-    background-color: #3180c8;
+    background-color: var(--primarybutton-background);
     color: white;
     padding: 10px 20px;
     border: none;

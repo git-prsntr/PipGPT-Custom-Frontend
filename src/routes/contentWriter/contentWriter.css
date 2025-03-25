@@ -1,40 +1,24 @@
 .contentWriter {
     padding: 20px;
     color: white;
-    max-height: 90vh;
+    height: 100%;
     overflow-y: auto;
+    overflow-x: hidden;
     scrollbar-width: thin;
     scrollbar-color: #3180c8 #0B1739;
+
+    /* Glassmorphism Effect */
+    background: var(--glassmorphism-background);
+    /* Semi-transparent background */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    /* Safari Support */
+    border-radius: 15px;
+    border: var(--glassmorphism-border);
+    box-shadow: var(--glassmorphism-box-shadow);
+    margin:0 10px;
 }
 
-.contentWriter::-webkit-scrollbar {
-    width: 8px;
-}
-
-.contentWriter::-webkit-scrollbar-thumb {
-    background-color: #3180c8;
-    border-radius: 4px;
-}
-
-.contentWriter::-webkit-scrollbar-track {
-    background-color: #0B1739;
-}
-
-.contentWriter h1 {
-    font-size: 24px;
-    color:  #00CFA2;
-    margin-bottom: 20px;
-}
-
-.backButton {
-    margin-bottom: 20px;
-    padding: 10px;
-    background-color: #3180c8;
-    border: none;
-    border-radius: 5px;
-    color: white;
-    cursor: pointer;
-}
 
 .contentInput {
     width: 100%;
@@ -42,8 +26,8 @@
     margin-bottom: 20px;
     padding: 10px;
     border-radius: 5px;
-    border: 1px solid #3180c8;
-    background-color: #0B1739;
+    border: var(--feature-border);
+    background-color: var(--feature-background);
     color: white;
     font-size: 16px;
 }
@@ -54,26 +38,13 @@
     margin-bottom: 10px;
     padding: 10px;
     border-radius: 5px;
-    border: 1px solid #3180c8;
-    background-color: #0B1739;
+    border: var(--feature-border);
+    background-color: var(--feature-background);
     color: white;
     resize: vertical;
     font-size: 16px;
     scrollbar-width: thin;
     scrollbar-color: #3180c8 #0B1739;
-}
-
-.generatedContent::-webkit-scrollbar {
-    width: 8px;
-}
-
-.generatedContent::-webkit-scrollbar-thumb {
-    background-color: #3180c8;
-    border-radius: 4px;
-}
-
-.generatedContent::-webkit-scrollbar-track {
-    background-color: #0B1739;
 }
 
 .charCount {
@@ -94,8 +65,8 @@
     flex: 2;
     padding: 10px;
     border-radius: 5px;
-    border: 1px solid #3180c8;
-    background-color: #0B1739;
+    border: var(--feature-border);
+    background-color: var(--feature-background);
     color: white;
     font-size: 16px;
 }
@@ -103,11 +74,11 @@
 .dropdown,
 .audienceButton {
     flex: 1;
-    background-color: #0B1739;
+    background-color: var(--feature-background);
     color: white;
     padding: 10px;
     border-radius: 5px;
-    border: 1px solid #3180c8;
+    border: var(--feature-border);
     font-size: 16px;
     cursor: pointer;
 }
@@ -126,8 +97,8 @@
 }
 
 .overlayContent {
-    background: #0B1739;
-    border: 1px solid #3180c8;
+    background: var(--feature-background);
+    border: var(--feature-border);
     border-radius: 10px;
     padding: 20px;
     color: white;
@@ -135,8 +106,6 @@
     max-height: 400px;
     overflow-y: auto;
     text-align: center;
-    scrollbar-width: thin;
-    scrollbar-color: #3180c8 #0B1739;
 }
 
 .overlayContent::-webkit-scrollbar {
