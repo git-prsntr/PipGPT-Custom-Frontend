@@ -1,3 +1,11 @@
+/**
+ * Entry point for the React application.
+ * 
+ * - Sets up React Router with nested routes.
+ * - Provides routing for authentication, dashboard, tools, and settings.
+ * - Renders the application inside `root` div.
+ */
+
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
@@ -17,11 +25,25 @@ import InternalDocuments from './routes/internalDocuments/internalDocuments';
 import AboutPage from './routes/aboutPage/aboutPage';
 import SettingsPage from './routes/settingsPage/settingsPage';
 import TemporaryChat from './routes/temporaryChatPage/temporaryChat';
+import ErrorPage from './routes/errorPage/errorPage';
+import InstantLookup from './routes/instantLookup/instantLookup';
 import ExamplePrompts from './routes/examplePrompts/examplePrompts';
+import AccountVerification from './routes/accountVerification/accountVerification';
+import ResetPassword from './routes/resetPassword/resetPassword';
+
+
+/**
+ * Defines application routes using React Router.
+ * 
+ * - Root layout wraps all routes.
+ * - Dashboard layout includes dashboard-related routes.
+ * - Tools, settings, and additional features are nested inside the dashboard.
+ */
 
 const router = createBrowserRouter([
   {
     element: <RootLayout />,
+    errorElement: <ErrorPage/>,
     children: [
       {
         path: "/",
@@ -35,9 +57,18 @@ const router = createBrowserRouter([
         path: "/sign-up/*",
         element: <Signuppage />,
       },
+      {
+        path:"/accountverification",
+        element:<AccountVerification/>,
+      },
+      {
+        path:"/resetpassword",
+        element:<ResetPassword/>,
+      },
       
       {
         element: <DashboardLayout />,
+        errorElement: <ErrorPage/>,
         children: [
           {
             path: "/dashboard",
@@ -72,6 +103,10 @@ const router = createBrowserRouter([
             element: <TemporaryChat />,
           },
           {
+            path: "/instantlookup", 
+            element: <InstantLookup />,
+          },
+          {
             path: "/about", 
             element: <AboutPage />,
           },
@@ -80,10 +115,14 @@ const router = createBrowserRouter([
             element: <SettingsPage />,
           },
           {
-            path: "/exampleprompts",
-            element:<ExamplePrompts/>,
+            path: "/exampleprompts", 
+            element: <ExamplePrompts />,
           },
         ],
+      },
+      {
+        path: "*", // Catch-all route for unknown paths (404)
+        element: <ErrorPage />,
       },
     ],
   },
