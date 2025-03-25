@@ -54,6 +54,7 @@ const Dashboardpage = () => {
         }
     }, [text]);
 
+    const ModelName =  selectedModel === "ampgpt" ? "internal" : "external";
     // Mutation to create a new chat session and navigate to the chat page
     const mutation = useMutation({
         mutationFn: ({ text, assistantResponse }) => {
@@ -66,7 +67,7 @@ const Dashboardpage = () => {
                     "Content-Type": "application/json",
                     "Authorization": `Bearer ${token}`, // Include token in Authorization header
                 },
-                body: JSON.stringify({ text, assistantResponse }),
+                body: JSON.stringify({ text, assistantResponse,ModelName }),
             }).then((res) => {
                 if (!res.ok) throw new Error("Failed to send chat message");
                 return res.json();

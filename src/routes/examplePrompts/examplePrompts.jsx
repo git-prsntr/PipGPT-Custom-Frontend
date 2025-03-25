@@ -11,6 +11,7 @@ const ExamplePrompts = () => {
     const [selectedPrompt, setSelectedPrompt] = useState(null);
     const [selectedModel, setSelectedModel] = useState("ampgpt");
     const [expandedPromptIndex, setExpandedPromptIndex] = useState(null);
+    const ModelName =  selectedModel === "ampgpt" ? "internal" : "external";
 
     // Mutation to create a new chat session and navigate to the chat page
     const mutation = useMutation({
@@ -24,7 +25,7 @@ const ExamplePrompts = () => {
                     "Content-Type": "application/json",
                     "Authorization": `Bearer ${token}`, // Include token
                 },
-                body: JSON.stringify({ text, assistantResponse }),
+                body: JSON.stringify({ text, assistantResponse,ModelName }),
             }).then((res) => res.json());
         },
         onSuccess: (data) => {

@@ -36,12 +36,13 @@ const Chatpage = () => {
     const modelDisplayName =
         selectedModel === "ampgpt" ? "Internal AMP GPT" : "External PipGPT";
 
+    const ModelName =  selectedModel === "ampgpt" ? "internal" : "external";
     // Fetch user chats to get the title
     const { data: userChatsData } = useQuery({
         queryKey: ["userChats"],
         queryFn: () => {
             const token = localStorage.getItem("token"); // Retrieve token from localStorage
-            return fetch(`${import.meta.env.VITE_API_URL}/api/userchats`, {
+            return fetch(`${import.meta.env.VITE_API_URL}/api/userchats?model=${ModelName}`, {
                 credentials: "include",
                 headers: {
                     "Authorization": `Bearer ${token}`, // Add token in Authorization header

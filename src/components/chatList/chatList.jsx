@@ -47,13 +47,15 @@ const ChatList = () => {
   // Fetch User Chats
 // Fetch User Chats
 const { data: userChats, isPending: isUserChatsPending, error } = useQuery({
-  queryKey: ["userChats"],
+  queryKey: ["userChats", selectedFilter],  // Refetch when filter changes
   queryFn: () => {
-    const token = localStorage.getItem("token"); // Retrieve token from localStorage
-    return fetch(`${import.meta.env.VITE_API_URL}/api/userchats`, {
+    const token = localStorage.getItem("token"); 
+    const modelName = selectedFilter === "all" ? "" : selectedFilter; // Send empty string for "all"
+
+    return fetch(`${import.meta.env.VITE_API_URL}/api/userchats?model=${selectedFilter}`, {
       credentials: "include",
       headers: {
-        "Authorization": `Bearer ${token}`, // Include token in Authorization header
+        "Authorization": `Bearer ${token}`,
         "Content-Type": "application/json",
       },
     }).then((res) => {
@@ -95,7 +97,8 @@ const { data: pinnedChats = [], isPending: isPinnedChatsPending } = useQuery({
   // Sort user chats (newest first)
   const sortedUserChats = userChats?.slice().sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)) || [];  
 
-
+  console.log(sortedUserChats,'sortedUserChats');
+  
   // Categorize chats into Today, Yesterday, and Older
   const categorizeChats = (chats) => {
     const today = new Date();
@@ -123,6 +126,8 @@ const { data: pinnedChats = [], isPending: isPinnedChatsPending } = useQuery({
   };
 
   const categorizedChats = categorizeChats(sortedUserChats);
+  console.log(categorizedChats,'categorizedChats');
+  
 
   // Render categorized chats with subheadings
   const renderCategorizedChats = () => {
@@ -342,6 +347,7 @@ const { data: pinnedChats = [], isPending: isPinnedChatsPending } = useQuery({
       key={chat.chatId}
       className={`chatItem ${chatIdFromURL === chat.chatId ? "active" : ""}`}
     >
+      {console.log(chat,'<<<<<<<<<<<<<<<<<<<<<<<,,,chat',newTitle)}
       {renamingChat === chat.chatId ? (
         <input
           type="text"
