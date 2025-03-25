@@ -36,7 +36,7 @@ const AccountVerification = () => {
 
             <div className="right">
                 <div className="imgContainer">
-                    <img src="/sportsnethomeimage.png" alt="Verify" />
+                    <img src="/amphomeimagefinal.png" alt="Verify" />
                 </div>
             </div>
         </div>
