@@ -15,11 +15,14 @@ const ExamplePrompts = () => {
     // Mutation to create a new chat session and navigate to the chat page
     const mutation = useMutation({
         mutationFn: ({ text, assistantResponse }) => {
+            const token = localStorage.getItem("token"); // Retrieve token from localStorage
+
             return fetch(`${import.meta.env.VITE_API_URL}/api/chats`, {
                 method: "POST",
                 credentials: "include",
                 headers: {
                     "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`, // Include token
                 },
                 body: JSON.stringify({ text, assistantResponse }),
             }).then((res) => res.json());

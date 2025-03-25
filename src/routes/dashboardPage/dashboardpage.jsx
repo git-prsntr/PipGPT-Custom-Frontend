@@ -57,14 +57,20 @@ const Dashboardpage = () => {
     // Mutation to create a new chat session and navigate to the chat page
     const mutation = useMutation({
         mutationFn: ({ text, assistantResponse }) => {
+            const token = localStorage.getItem("token"); // Get token from localStorage
+
             return fetch(`${import.meta.env.VITE_API_URL}/api/chats`, {
                 method: "POST",
                 credentials: "include",
                 headers: {
                     "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`, // Include token in Authorization header
                 },
                 body: JSON.stringify({ text, assistantResponse }),
-            }).then((res) => res.json());
+            }).then((res) => {
+                if (!res.ok) throw new Error("Failed to send chat message");
+                return res.json();
+            });
         },
         onSuccess: (data) => {
             if (data.chatId) {
@@ -72,7 +78,11 @@ const Dashboardpage = () => {
                 navigate(`/dashboard/chats/${data.chatId}`, { state: { selectedModel } });
             }
         },
+        onError: (error) => {
+            console.error("Mutation error:", error);
+        },
     });
+
 
     /**
      * Handles user input submission to generate AI responses.

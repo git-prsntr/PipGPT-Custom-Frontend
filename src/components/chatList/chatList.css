@@ -528,7 +528,7 @@ hr {
 }
 
 .list::-webkit-scrollbar-thumb {
-    background-color: var(--scrollbar-background);
+    background-color: #a4161a;
     /* Color of the scrollbar thumb */
     border-radius: 4px;
     /* Rounded corners for the thumb */
@@ -633,4 +633,3 @@ hr {
     padding: 10px 0;
     position: relative;
 }
-

@@ -23,21 +23,30 @@ const InternalDocuments = () => {
   const [pdfToView, setPdfToView] = useState(null);
   const [deleteModalVisible, setDeleteModalVisible] = useState(false); // Delete confirmation modal
   const [documentToDelete, setDocumentToDelete] = useState(null); // Store selected document to delete
-  const userId = "demouser";
 
   useEffect(() => {
     fetchDocuments();
   }, []);
 
+  
   const fetchDocuments = async () => {
     try {
+      const token = localStorage.getItem("token"); // Retrieve token
+
       const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/documents`, {
-        params: { userId },
+        headers: {
+          "Authorization": `Bearer ${token}`, // Include token in request headers
+        },
       });
+
       setDocuments(response.data);
     } catch (error) {
       console.error("Error fetching documents:", error);
     }
+  };
+
+  const handleBackClick = () => {
+    navigate("/dashboard");
   };
 
   const handleFileChange = (e) => {
@@ -49,13 +58,22 @@ const InternalDocuments = () => {
 
     setIsUploading(true);
     const formData = new FormData();
-    formData.append("fileData", selectedFile);
-    formData.append("userId", userId);
+    formData.append("file", selectedFile);
 
     try {
-      const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/documents/upload`, formData, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
+      const token = localStorage.getItem("token"); // Retrieve token
+
+      const response = await axios.post(
+        `${import.meta.env.VITE_API_URL}/api/documents/upload`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            "Authorization": `Bearer ${token}`, // Include token in request headers
+          },
+        }
+      );
+
       setDocuments([...documents, response.data]);
       setSelectedFile(null);
     } catch (error) {
@@ -74,8 +92,15 @@ const InternalDocuments = () => {
     if (!documentToDelete) return;
 
     try {
-      await axios.delete(`${import.meta.env.VITE_API_URL}/api/documents/${documentToDelete}`);
-      setDocuments(documents.filter((doc) => doc._id !== documentToDelete));
+      const token = localStorage.getItem("token"); // Retrieve token
+
+      await axios.delete(`${import.meta.env.VITE_API_URL}/api/documents/${documentToDelete}`, {
+        headers: {
+          "Authorization": `Bearer ${token}`, // Include token in request headers
+        },
+      });
+
+      setDocuments(documents.filter((doc) => doc.documentId !== documentToDelete));
       setDeleteModalVisible(false);
       setDocumentToDelete(null);
     } catch (error) {
@@ -85,7 +110,14 @@ const InternalDocuments = () => {
 
   const handleViewPDF = async (id) => {
     try {
-      const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/documents/${id}`);
+      const token = localStorage.getItem("token"); // Retrieve token
+
+      const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/documents/${id}`, {
+        headers: {
+          "Authorization": `Bearer ${token}`, // Include token in request headers
+        },
+      });
+
       setPdfToView(response.data.fileUrl);
       setModalVisible(true);
     } catch (error) {
@@ -95,7 +127,7 @@ const InternalDocuments = () => {
 
   return (
     <div className="internalDocumentsPage">
-      <h1 className="header-style">Internal Documents</h1>
+      <h1>Internal Documents</h1>
 
       <div
         className="uploadSection"
@@ -134,15 +166,15 @@ const InternalDocuments = () => {
         ) : (
           <ul>
             {documents.map((doc) => (
-              <li key={doc._id} className="documentItem">
+              <li key={doc.documentId} className="documentItem">
                 <span
                   className="documentLink"
-                  onClick={() => handleViewPDF(doc._id)}
+                  onClick={() => handleViewPDF(doc.documentId)}
                 >
                   {doc.fileName}
                 </span>
                 <button
-                  onClick={() => handleDeleteConfirmation(doc._id)}
+                  onClick={() => handleDeleteConfirmation(doc.documentId)}
                   className="deleteButton"
                 >
                   Delete

@@ -45,28 +45,55 @@ const ChatList = () => {
   const chatIdFromURL = location.pathname.split("/").pop();
 
   // Fetch User Chats
-  const { data: userChats, isPending: isUserChatsPending, error } = useQuery({
-    queryKey: ["userChats"],
-    queryFn: () =>
-      fetch(`${import.meta.env.VITE_API_URL}/api/userchats`, {
-        credentials: "include",
-      }).then((res) => res.json()),
-  });
+// Fetch User Chats
+const { data: userChats, isPending: isUserChatsPending, error } = useQuery({
+  queryKey: ["userChats"],
+  queryFn: () => {
+    const token = localStorage.getItem("token"); // Retrieve token from localStorage
+    return fetch(`${import.meta.env.VITE_API_URL}/api/userchats`, {
+      credentials: "include",
+      headers: {
+        "Authorization": `Bearer ${token}`, // Include token in Authorization header
+        "Content-Type": "application/json",
+      },
+    }).then((res) => {
+      if (!res.ok) {
+        throw new Error("Failed to fetch user chats");
+      }
+      return res.json();
+    });
+  },
+});
 
-
-  // Fetch Pinned Chats
-  const { data: pinnedChats = [], isPending: isPinnedChatsPending } = useQuery({
-    queryKey: ["pinnedChats"],
-    queryFn: () =>
-      fetch(`${import.meta.env.VITE_API_URL}/api/pinnedchats`, {
-        credentials: "include",
+// Fetch Pinned Chats
+const { data: pinnedChats = [], isPending: isPinnedChatsPending } = useQuery({
+  queryKey: ["pinnedChats"],
+  queryFn: () => {
+    const token = localStorage.getItem("token"); // Retrieve token from localStorage
+    return fetch(`${import.meta.env.VITE_API_URL}/api/pinnedchats`, {
+      credentials: "include",
+      headers: {
+        "Authorization": `Bearer ${token}`, // Include token in Authorization header
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("Failed to fetch pinned chats");
+        }
+        return res.json();
       })
-        .then((res) => res.json())
-        .then((data) => Array.isArray(data) ? data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)) : []),
-  });
+      .then((data) =>
+        Array.isArray(data)
+          ? data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+          : []
+      );
+  },
+});
+
 
   // Sort user chats (newest first)
-  const sortedUserChats = userChats?.slice().sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)) || [];
+  const sortedUserChats = userChats?.slice().sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)) || [];  
 
 
   // Categorize chats into Today, Yesterday, and Older
@@ -126,71 +153,94 @@ const ChatList = () => {
 
   // Mutation to pin a chat
   const pinChatMutation = useMutation({
-    mutationFn: ({ chatId, title }) =>
-      fetch(`${import.meta.env.VITE_API_URL}/api/pinnedchats`, {
-        method: "POST",
-        credentials: "include",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ chatId, title }),
-      }),
-    onSuccess: () => {
-      queryClient.invalidateQueries(["userChats"]);
-      queryClient.invalidateQueries(["pinnedChats"]);
-    },
+      mutationFn: ({ chatId, title }) => {
+          const token = localStorage.getItem("token"); // Retrieve token
 
+          return fetch(`${import.meta.env.VITE_API_URL}/api/pinnedchats`, {
+              method: "POST",
+              credentials: "include",
+              headers: {
+                  "Content-Type": "application/json",
+                  "Authorization": `Bearer ${token}`, // Include token
+              },
+              body: JSON.stringify({ chatId, title }),
+          });
+      },
+      onSuccess: () => {
+          queryClient.invalidateQueries(["userChats"]);
+          queryClient.invalidateQueries(["pinnedChats"]);
+      },
   });
 
   // Mutation to unpin a chat
 
   const unpinChatMutation = useMutation({
-    mutationFn: (chatId) =>
-      fetch(`${import.meta.env.VITE_API_URL}/api/pinnedchats/${chatId}`, {
-        method: "DELETE",
-        credentials: "include",
-      }),
-    onSuccess: () => {
-      queryClient.invalidateQueries(["userChats"]);
-      queryClient.invalidateQueries(["pinnedChats"]);
-    },
+    mutationFn: (chatId) => {
+        const token = localStorage.getItem("token");
 
+        return fetch(`${import.meta.env.VITE_API_URL}/api/pinnedchats/${chatId}`, {
+            method: "DELETE",
+            credentials: "include",
+            headers: {
+                "Authorization": `Bearer ${token}`,
+            },
+        });
+    },
+    onSuccess: () => {
+        queryClient.invalidateQueries(["userChats"]);
+        queryClient.invalidateQueries(["pinnedChats"]);
+    },
   });
 
   // Mutation to delete a chat
   const deleteChatMutation = useMutation({
-    mutationFn: (chatId) =>
-      fetch(`${import.meta.env.VITE_API_URL}/api/chats/${chatId}`, {
-        method: "DELETE",
-        credentials: "include",
-      }).then((res) => {
-        if (!res.ok) throw new Error("Failed to delete chat");
-        return res.json();
-      }),
+    mutationFn: (chatId) => {
+        const token = localStorage.getItem("token");
+
+        return fetch(`${import.meta.env.VITE_API_URL}/api/chats/${chatId}`, {
+            method: "DELETE",
+            credentials: "include",
+            headers: {
+                "Authorization": `Bearer ${token}`,
+            },
+        }).then((res) => {
+            if (!res.ok) throw new Error("Failed to delete chat");
+            return res.json();
+        });
+    },
     onSuccess: () => {
-      queryClient.invalidateQueries(["userChats"]);
-      queryClient.invalidateQueries(["pinnedChats"]);
+        queryClient.invalidateQueries(["userChats"]);
+        queryClient.invalidateQueries(["pinnedChats"]);
     },
     onError: (error) => {
-      console.error("Error deleting chat:", error);
+        console.error("Error deleting chat:", error);
     },
   });
 
   // Mutation to delete chat from pinned chats section
   const deletePinnedChatMutation = useMutation({
-    mutationFn: (chatId) =>
-      fetch(`${import.meta.env.VITE_API_URL}/api/chats/${chatId}`, {
-        method: "DELETE",
-        credentials: "include",
-      }).then((res) => {
-        if (!res.ok) throw new Error("Failed to delete pinned chat");
-        return res.json();
-      }),
+    mutationFn: (chatId) => {
+        const token = localStorage.getItem("token");
+
+        return fetch(`${import.meta.env.VITE_API_URL}/api/chats/${chatId}`, {
+            method: "DELETE",
+            credentials: "include",
+            headers: {
+                "Authorization": `Bearer ${token}`,
+            },
+        }).then((res) => {
+            if (!res.ok) throw new Error("Failed to delete pinned chat");
+            return res.json();
+        });
+    },
     onSuccess: () => {
-      queryClient.invalidateQueries(["pinnedChats"]);
+        queryClient.invalidateQueries(["pinnedChats"]);
     },
     onError: (error) => {
-      console.error("Error deleting pinned chat:", error);
+        console.error("Error deleting pinned chat:", error);
     },
   });
+
 
   // Delete Handlers
   const handleDeleteChat = (chatId) => {
@@ -204,20 +254,26 @@ const ChatList = () => {
   // Mutation to Rename a chat
 
   const renameMutation = useMutation({
-    mutationFn: ({ chatId, newTitle }) =>
-      fetch(`${import.meta.env.VITE_API_URL}/api/chats/${chatId}/rename`, {
-        method: "PUT",
-        credentials: "include",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ newTitle }),
-      }),
-    onSuccess: () => {
-      queryClient.invalidateQueries(["userChats"]);
-      queryClient.invalidateQueries(["pinnedChats"]);
-      setRenamingChat(null);
-      setNewTitle("");
+    mutationFn: ({ chatId, newTitle }) => {
+        const token = localStorage.getItem("token");
+
+        return fetch(`${import.meta.env.VITE_API_URL}/api/chats/${chatId}/rename`, {
+            method: "PUT",
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`,
+            },
+            body: JSON.stringify({ newTitle }),
+        });
     },
-  });
+    onSuccess: () => {
+        queryClient.invalidateQueries(["userChats"]);
+        queryClient.invalidateQueries(["pinnedChats"]);
+        setRenamingChat(null);
+        setNewTitle("");
+    },
+  });;
 
 
   // Add a New Folder Handler
@@ -281,45 +337,46 @@ const ChatList = () => {
 
   //Chat Lists Rendering
   const renderChatItem = (chat, isPinned) => (
+    
     <div
-      key={chat._id}
-      className={`chatItem ${chatIdFromURL === chat._id ? "active" : ""}`}
+      key={chat.chatId}
+      className={`chatItem ${chatIdFromURL === chat.chatId ? "active" : ""}`}
     >
-      {renamingChat === chat._id ? (
+      {renamingChat === chat.chatId ? (
         <input
           type="text"
           value={newTitle}
           onChange={(e) => setNewTitle(e.target.value)}
           onBlur={() => {
-            renameMutation.mutate({ chatId: chat._id, newTitle });
+            renameMutation.mutate({ chatId: chat.chatId, newTitle });
             handleMenuItemClick(); // Close menu after renaming
           }}
           onKeyDown={(e) => {
             if (e.key === 'Enter') {
-              renameMutation.mutate({ chatId: chat._id, newTitle });
+              renameMutation.mutate({ chatId: chat.chatId, newTitle });
               handleMenuItemClick(); // Close menu after pressing Enter
             }
           }}
           autoFocus
         />
       ) : (
-        <Link to={`/dashboard/chats/${chat._id}`}>{chat.title}</Link>
+        <Link to={`/dashboard/chats/${chat.chatId}`}>{chat.title}</Link>
       )}
 
-      <button className="menuButton" onClick={() => handleMenuToggle(chat._id)}>
+      <button className="menuButton" onClick={() => handleMenuToggle(chat.chatId)}>
         &#x22EE; {/* Three-dot menu icon */}
       </button>
-      <div className={`menu ${activeMenu === chat._id ? 'show-menu' : ''}`} onMouseLeave={() => setActiveMenu(null)}>
+      <div className={`menu ${activeMenu === chat.chatId ? 'show-menu' : ''}`} onMouseLeave={() => setActiveMenu(null)}>
         <ul>
-          <li onClick={() => { setRenamingChat(chat._id); handleMenuItemClick(); }}>Rename</li>
-          <li onClick={() => { isPinned ? handleDeletePinnedChat(chat._id) : handleDeleteChat(chat._id); handleMenuItemClick(); }}>Delete</li>
+          <li onClick={() => { setRenamingChat(chat.chatId); handleMenuItemClick(); }}>Rename</li>
+          <li onClick={() => { isPinned ? handleDeletePinnedChat(chat.chatId) : handleDeleteChat(chat.chatId); handleMenuItemClick(); }}>Delete</li>
           {isPinned ? (
-            <li onClick={() => { unpinChatMutation.mutate(chat._id); handleMenuItemClick(); }}>Unpin Chat</li>
+            <li onClick={() => { unpinChatMutation.mutate(chat.chatId); handleMenuItemClick(); }}>Unpin Chat</li>
           ) : (
-            <li onClick={() => { pinChatMutation.mutate({ chatId: chat._id, title: chat.title }); handleMenuItemClick(); }}>Pin Chat</li>
+            <li onClick={() => { pinChatMutation.mutate({ chatId: chat.chatId, title: chat.title }); handleMenuItemClick(); }}>Pin Chat</li>
           )}
           {folders.length > 0 ? (
-            <li onClick={() => { setMovingChat(chat._id); handleMenuItemClick(); }}>Move to Folder</li>
+            <li onClick={() => { setMovingChat(chat.chatId); handleMenuItemClick(); }}>Move to Folder</li>
           ) : (
             <li className="disabled">Move to Folder</li>
           )}
@@ -441,7 +498,7 @@ return (
           {expandedFolders[folder] && (
             <div className="folderChats">
               {chatsInFolders[folder]?.map((chatId) => {
-                const chat = data.find((c) => c._id === chatId);
+                const chat = data.find((c) => c.chatId === chatId);
                 return (
                   <div key={chatId}>
                     <Link to={`/dashboard/chats/${chatId}`}>{chat?.title}</Link>

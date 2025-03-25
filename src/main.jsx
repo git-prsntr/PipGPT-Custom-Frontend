@@ -30,6 +30,7 @@ import InstantLookup from './routes/instantLookup/instantLookup';
 import ExamplePrompts from './routes/examplePrompts/examplePrompts';
 import AccountVerification from './routes/accountVerification/accountVerification';
 import ResetPassword from './routes/resetPassword/resetPassword';
+import SSOCallback from './routes/SSOCallback';
 
 
 /**
@@ -77,6 +78,10 @@ const router = createBrowserRouter([
           {
             path: "/dashboard/chats/:id",
             element: <Chatpage />,
+          },
+          {
+            path: "/sso-callback",
+            element: <SSOCallback />,
           },
           {
             path: "/dashboard/tools/slidesgenerator", 

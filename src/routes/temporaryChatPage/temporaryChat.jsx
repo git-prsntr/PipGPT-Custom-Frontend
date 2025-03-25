@@ -51,7 +51,6 @@ const TemporaryChat = () => {
     }
   }, [inputText]);
 
-
   const endRef = useRef(null);
 
   // Auto-scroll to the bottom whenever messages update

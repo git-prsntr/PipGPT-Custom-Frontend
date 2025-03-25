@@ -28,7 +28,6 @@
 }
 
 
-
 .titleSection h3 {
     margin-right: 20px;
     font-size: 10px;
@@ -36,4 +35,17 @@
     color: #cecece; /* Adjust text color */
     white-space: nowrap; /* Prevent wrapping */
     line-height: 1; /* Ensures alignment with the title */
+}
+
+.message.assistant.loading {
+    width:95%;
+    background-color: #1b2b4f; /* Match assistant background */
+    color: #7a92b0; /* Subtle color for loading text */
+    text-align: center;
+    padding: 10px;
+    border-radius: 5px;
+    max-width: 98%;
+    align-self: flex-end;
+    margin-bottom: 10px;
+    font-style: italic; /* Make it visually distinct */
 }

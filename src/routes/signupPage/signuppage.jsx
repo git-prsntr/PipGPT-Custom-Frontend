@@ -12,26 +12,32 @@ const Signuppage = () => {
     const navigate = useNavigate();
 
     const handleSignUp = async (e) => {
-        e.preventDefault();
-        setError(null);
+    e.preventDefault();
+    setError(null);
 
-        try {
-            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/signup`, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ firstName, lastName, email, password, company }),
-            });
+    try {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/user/signup`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ 
+                first_name: firstName,  // ✅ Change firstName to first_name
+                last_name: lastName,    // ✅ Change lastName to last_name
+                email, 
+                password, 
+                company 
+            }),
+        });
 
-            const data = await response.json();
-            if (response.ok) {
-                navigate("/sign-in");
-            } else {
-                setError(data.message || "Sign-up failed");
-            }
-        } catch (err) {
-            setError("Something went wrong. Please try again.");
+        const data = await response.json();
+        if (response.ok) {
+            navigate("/sign-in");
+        } else {
+            setError(data.message || "Sign-up failed");
         }
-    };
+    } catch (err) {
+        setError("Something went wrong. Please try again.");
+    }
+};
 
     const handleSocialSignUp = (provider) => {
         window.location.href = `${import.meta.env.VITE_API_URL}/api/auth/${provider}`;

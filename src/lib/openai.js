@@ -1,3 +1,17 @@
+/**
+ * @file AI Completion Generator
+ * @description This module generates AI responses using either AMP GPT (Bedrock Agent Runtime) or OpenAI's GPT models.
+ */
+
+/**
+ * Generates a completion response from either AMP GPT (Bedrock) or OpenAI's GPT-4 Turbo.
+ * @async
+ * @param {Array} messages - The conversation history including user and assistant messages.
+ * @param {string} model - The selected AI model ('ampgpt' for AMP GPT, 'general' for OpenAI's GPT-4 Turbo).
+ * @returns {Promise<string>} The generated AI response.
+ * @throws {Error} If an invalid model is selected or there is an error in API response.
+ */
+
 export const generateCompletion = async (messages, model) => {
   // Map the toggle options to the respective models
   const modelMapping = {
@@ -33,14 +47,20 @@ export const generateCompletion = async (messages, model) => {
 
   try {
     if (model === "ampgpt") {
+      const token = localStorage.getItem("token"); // Retrieve token
+            const user_Id = localStorage.getItem("userId"); // Retrieve token
+
       // Use Bedrock Agent Runtime for ampgpt
       const response = await fetch(`${import.meta.env.VITE_API_URL}/api/retrieve-and-generate`, {
         method: "POST",
+
         headers: {
           "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`, // Include token in request headers
+
         },
         body: JSON.stringify({
-          userId: "demouser", 
+          userId : user_Id,
           query: messagesWithSystem[messagesWithSystem.length - 1].content,
         }),
       });
