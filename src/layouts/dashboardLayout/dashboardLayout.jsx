@@ -7,6 +7,8 @@ import DashboardMenuLeft from '../../components/dashboardmenuleft/dashboardMenuL
 
 const DashboardLayout = () => {
 
+  //Temporarily hidden to bypass signin
+/*
     const {userId, isLoaded} = useAuth()
     const navigate = useNavigate()
 
@@ -17,7 +19,7 @@ const DashboardLayout = () => {
     },[isLoaded, userId, navigate]);
 
     if(!isLoaded) return "Loading...";
-
+*/
 
     return (
       <div className='dashboardLayout'>
