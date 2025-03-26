@@ -49,7 +49,7 @@ const InternalDocuments = () => {
 
     setIsUploading(true);
     const formData = new FormData();
-    formData.append("fileData", selectedFile);
+    formData.append("file", selectedFile);
     formData.append("userId", userId);
 
     try {
