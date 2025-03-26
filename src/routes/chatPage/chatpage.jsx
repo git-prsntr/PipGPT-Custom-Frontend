@@ -71,14 +71,17 @@ const Chatpage = () => {
         </h3>
       </div>
 
-      <NewPrompt
-        initialMessages={data?.history || []}
-        selectedModel={selectedModel}
-        chatId={chatId}
-        loading={isLoading || isLoadingChatId}
-        error={error}
-      />
+      <div className="chatContent">
+        <NewPrompt
+          initialMessages={data?.history || []}
+          selectedModel={selectedModel}
+          chatId={chatId}
+          loading={isLoading || isLoadingChatId}
+          error={error}
+        />
+      </div>
     </div>
+
   );
 };
 

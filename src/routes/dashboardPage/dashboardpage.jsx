@@ -21,6 +21,17 @@ const Dashboardpage = () => {
     const formContainerRef = useRef(null);
     const buttonContainerRef = useRef(null);
 
+   //Handle enter to submit 
+
+    const handleKeyDown = (e) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            handleSubmit(text);
+            e.target.value = ''; 
+            setText(''); 
+        }
+    };
+
     // Get current hour and determine greetings.
     const getGreeting = () => {
         const hour = new Date().getHours();
@@ -172,12 +183,12 @@ const Dashboardpage = () => {
                     <textarea
                         ref={textareaRef}
                         name="text"
-                        placeholder={`Ask me anything... (You have selected ${selectedModel === "ampgpt" ? "Internal AMP GPT" : "External PipGPT"
-                            })`}
+                        placeholder={`Ask me anything... (Press Enter to send, Shift+Enter for new line)`}
                         autoComplete="off"
                         rows="2"
                         value={text}
                         onChange={(e) => setText(e.target.value)}
+                        onKeyDown={handleKeyDown}
                     ></textarea>
                     <div className="button-container" ref={buttonContainerRef}>
                         <div className="choosemodel">

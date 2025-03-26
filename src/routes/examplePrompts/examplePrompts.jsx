@@ -12,7 +12,6 @@ const ExamplePrompts = () => {
     const [selectedModel, setSelectedModel] = useState("ampgpt");
     const [expandedPromptIndex, setExpandedPromptIndex] = useState(null);
 
-    // Mutation to create a new chat session and navigate to the chat page
     const mutation = useMutation({
         mutationFn: ({ text, assistantResponse }) => {
             return fetch(`${import.meta.env.VITE_API_URL}/api/chats`, {
@@ -24,13 +23,15 @@ const ExamplePrompts = () => {
                 body: JSON.stringify({ text, assistantResponse }),
             }).then((res) => res.json());
         },
-        onSuccess: (data) => {
+        onSuccess: (data, variables) => {
+            const { model } = variables; // 👈 get the model passed
             if (data.chatId) {
                 queryClient.invalidateQueries({ queryKey: ["userChats"] });
-                navigate(`/dashboard/chats/${data.chatId}`, { state: { selectedModel } });
+                navigate(`/dashboard/chats/${data.chatId}`, { state: { selectedModel: model } });
             }
         },
     });
+
 
     /**
      * Handles prompt selection and expands the clicked prompt
@@ -55,22 +56,20 @@ const ExamplePrompts = () => {
      */
     const handleGPTSelect = async (model) => {
         if (!selectedPrompt) return;
-
-        // Navigate immediately to the chat page with a loading state
+      
         navigate(`/dashboard/chats/loading`, { state: { loading: true, selectedModel: model } });
-
+      
         try {
-            // Generate an assistant response using the selected model
-            const assistantResponse = await generateCompletion([{ role: "user", content: selectedPrompt }], model);
-
-            // Save the chat and navigate to the chat page
-            mutation.mutate({ text: selectedPrompt, assistantResponse });
+          const assistantResponse = await generateCompletion([{ role: "user", content: selectedPrompt }], model);
+          
+          mutation.mutate({ text: selectedPrompt, assistantResponse, model }); // 👈 include model here
         } catch (err) {
-            console.error("Error generating assistant response:", err);
+          console.error("Error generating assistant response:", err);
         }
-
-        setExpandedPromptIndex(null); // Collapse the prompt
-    };
+      
+        setExpandedPromptIndex(null);
+      };
+      
 
     return (
         <div className="exPrompts">
