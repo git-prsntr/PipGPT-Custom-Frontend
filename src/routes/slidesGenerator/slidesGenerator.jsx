@@ -141,6 +141,7 @@ Make each slide visually appealing with clear bullet points. Use the following s
 3. Outcome-focused and client-centric
 4. Aligned with AMP Bank’s brand voice
 5. Include suggested client-facing language where helpful
+6. The response should be in Australian English.
 `;
     };
 

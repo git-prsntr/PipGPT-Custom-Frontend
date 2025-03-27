@@ -192,31 +192,7 @@ const NewPrompt = ({ initialMessages = [], selectedModel, chatId, loading, error
                     type="checkbox"
                     checked={searchInternet}
                     onChange={() => setSearchInternet(!searchInternet)}
-                  /><div className="formControls">
-                    <div className="formControls-left">
-                      {selectedModel === "general" && (
-                        <div className="toggleWrapper">
-                          <label className="toggleSwitch">
-                            <input
-                              type="checkbox"
-                              checked={searchInternet}
-                              onChange={() => setSearchInternet(!searchInternet)}
-                            />
-                            <span className="slider"></span>
-                          </label>
-                          <span className="toggleLabel">Search Internet</span>
-                        </div>
-                      )}
-                    </div>
-                    <div className="formControls-right">
-                      <div className="button-container" ref={buttonContainerRef}>
-                        <button type="submit" className="submitButton">
-                          <i className="fa fa-paper-plane"></i>
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-
+                  />
                   <span className="slider"></span>
                 </label>
                 <span className="toggleLabel">Search Internet</span>
