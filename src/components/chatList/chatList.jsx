@@ -43,6 +43,7 @@ const ChatList = () => {
   const [renamingFolder, setRenamingFolder] = useState(null); // Track the folder being renamed
   const [newFolderName, setNewFolderName] = useState(""); // Track new folder name for renaming
   const chatIdFromURL = location.pathname.split("/").pop();
+  const [showFolderDropdown, setShowFolderDropdown] = useState(false);
 
   // Fetch User Chats
   const { data: userChats, isPending: isUserChatsPending, error } = useQuery({
@@ -97,26 +98,31 @@ const ChatList = () => {
 
   const categorizedChats = categorizeChats(sortedUserChats);
 
-  // Render categorized chats with subheadings
   const renderCategorizedChats = () => {
+    // Get all chat IDs that are in folders
+    const chatsInFoldersIds = Object.values(chatsInFolders).flat();
+
+    // Filter out chats that are in folders
+    const filterChats = (chats) => chats.filter(chat => !chatsInFoldersIds.includes(chat._id));
+
     return (
       <>
         {categorizedChats.today.length > 0 && (
           <>
             <span className="subHeading">Today</span>
-            {categorizedChats.today.map((chat) => renderChatItem(chat, false))}
+            {filterChats(categorizedChats.today).map((chat) => renderChatItem(chat, false))}
           </>
         )}
         {categorizedChats.yesterday.length > 0 && (
           <>
             <span className="subHeading">Yesterday</span>
-            {categorizedChats.yesterday.map((chat) => renderChatItem(chat, false))}
+            {filterChats(categorizedChats.yesterday).map((chat) => renderChatItem(chat, false))}
           </>
         )}
         {categorizedChats.older.length > 0 && (
           <>
             <span className="subHeading">Older</span>
-            {categorizedChats.older.map((chat) => renderChatItem(chat, false))}
+            {filterChats(categorizedChats.older).map((chat) => renderChatItem(chat, false))}
           </>
         )}
       </>
@@ -229,12 +235,18 @@ const ChatList = () => {
     }
   };
 
-  // Move chat to the folder Handler
   const handleMoveChatToFolder = (folderName, chatId) => {
+    // Add to folder
     setChatsInFolders((prev) => ({
       ...prev,
       [folderName]: [...(prev[folderName] || []), chatId],
     }));
+
+    // Remove from pinned chats if it exists there
+    if (pinnedChats?.some(chat => chat._id === chatId)) {
+      unpinChatMutation.mutate(chatId);
+    }
+
     setMovingChat(null);
   };
 
@@ -255,6 +267,41 @@ const ChatList = () => {
   const handleMenuItemClick = () => {
     setActiveMenu(null);
   };
+
+
+  //Render folder dropdown
+  const renderFolderDropdown = () => {
+    if (!movingChat || folders.length === 0) return null;
+
+    return (
+      <div className="folderDropdownOverlay" onClick={() => setMovingChat(null)}>
+        <div className="folderDropdown" onClick={(e) => e.stopPropagation()}>
+          <h4>Move to Folder</h4>
+          {folders.map((folder) => (
+            <div
+              key={folder}
+              className="folderOption"
+              onClick={() => {
+                handleMoveChatToFolder(folder, movingChat);
+                setMovingChat(null);
+              }}
+            >
+              <i className="fa-solid fa-folder"></i>
+              {folder}
+            </div>
+          ))}
+          <button
+            className="cancelButton"
+            onClick={() => setMovingChat(null)}
+          >
+            Cancel
+          </button>
+        </div>
+      </div>
+    );
+  };
+
+
 
 
   // Renaming a Chat Hndlers
@@ -329,7 +376,7 @@ const ChatList = () => {
   );
 
 
-return (
+  return (
     <div className="chatList">
       <span className="title">Pinned Chats</span>
       <div className="list pinned-list">
@@ -379,7 +426,9 @@ return (
           ? "Loading..."
           : error
             ? "Something went wrong!"
-            : renderCategorizedChats()}
+            : sortedUserChats.length === 0
+              ? <p>No chats here. Create new chat.</p>
+              : renderCategorizedChats()}
       </div>
 
       <hr />
@@ -441,17 +490,64 @@ return (
           {expandedFolders[folder] && (
             <div className="folderChats">
               {chatsInFolders[folder]?.map((chatId) => {
-                const chat = data.find((c) => c._id === chatId);
-                return (
-                  <div key={chatId}>
-                    <Link to={`/dashboard/chats/${chatId}`}>{chat?.title}</Link>
+                // Find the chat in either userChats or pinnedChats
+                const chat = [...(userChats || []), ...(pinnedChats || [])].find(c => c._id === chatId);
+                return chat ? (
+                  <div
+                    key={chatId}
+                    className={`chatItem ${chatIdFromURL === chat._id ? "active" : ""}`}
+                  >
+                    {renamingChat === chat._id ? (
+                      <input
+                        type="text"
+                        value={newTitle}
+                        onChange={(e) => setNewTitle(e.target.value)}
+                        onBlur={() => {
+                          renameMutation.mutate({ chatId: chat._id, newTitle });
+                          handleMenuItemClick();
+                        }}
+                        onKeyDown={(e) => {
+                          if (e.key === 'Enter') {
+                            renameMutation.mutate({ chatId: chat._id, newTitle });
+                            handleMenuItemClick();
+                          }
+                        }}
+                        autoFocus
+                      />
+                    ) : (
+                      <Link to={`/dashboard/chats/${chat._id}`}>{chat.title}</Link>
+                    )}
+
+                    <button className="menuButton" onClick={() => handleMenuToggle(`folder-${chat._id}`)}>
+                      &#x22EE;
+                    </button>
+                    <div className={`menu ${activeMenu === `folder-${chat._id}` ? 'show-menu' : ''}`}
+                      onMouseLeave={() => setActiveMenu(null)}>
+                      <ul>
+                        <li onClick={() => { setRenamingChat(chat._id); handleMenuItemClick(); }}>Rename</li>
+                        <li onClick={() => { handleDeleteChat(chat._id); handleMenuItemClick(); }}>Delete</li>
+                        <li onClick={() => {
+                          pinChatMutation.mutate({ chatId: chat._id, title: chat.title });
+                          handleMenuItemClick();
+                        }}>Pin Chat</li>
+                        <li onClick={() => {
+                          // Remove from folder
+                          setChatsInFolders(prev => ({
+                            ...prev,
+                            [folder]: prev[folder].filter(id => id !== chat._id)
+                          }));
+                          handleMenuItemClick();
+                        }}>Remove from Folder</li>
+                      </ul>
+                    </div>
                   </div>
-                );
+                ) : null;
               })}
             </div>
           )}
         </div>
       ))}
+      {renderFolderDropdown()}
     </div>
   );
 };
