@@ -59,21 +59,12 @@ const InternalDocuments = () => {
     setIsUploading(true);
     const formData = new FormData();
     formData.append("file", selectedFile);
+    formData.append("userId", userId);
 
     try {
-      const token = localStorage.getItem("token"); // Retrieve token
-
-      const response = await axios.post(
-        `${import.meta.env.VITE_API_URL}/api/documents/upload`,
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-            "Authorization": `Bearer ${token}`, // Include token in request headers
-          },
-        }
-      );
-
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/documents/upload`, formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
       setDocuments([...documents, response.data]);
       setSelectedFile(null);
     } catch (error) {

@@ -10,26 +10,18 @@ import "./newPrompt.css";
 import axios from "axios";
 import { generateCompletion } from "../../lib/openai";
 
-/**
- * @component NewPrompt
- * @param {Object} props - Component props
- * @param {Array} props.initialMessages - Initial chat messages
- * @param {string} props.selectedModel - Selected AI model
- * @param {string} props.chatId - Unique chat identifier
- * @param {boolean} props.loading - Indicates if chat data is loading
- * @param {object} props.error - Any error during fetch
- * @returns {JSX.Element} The chatbot component
- */
-
 const NewPrompt = ({ initialMessages = [], selectedModel, chatId, loading, error }) => {
   const [messages, setMessages] = useState(initialMessages);
   const [isTyping, setIsTyping] = useState(false);
   const [loadingTextIndex, setLoadingTextIndex] = useState(0);
   const [searchInternet, setSearchInternet] = useState(false);
   const loadingTexts = ["Digging resources...", "Connecting dots...", "Building sentences..."];
+  const [inputText, setInputText] = useState("");
 
   const endRef = useRef(null);
-  const inputRef = useRef(null);
+  const textareaRef = useRef(null);
+  const formContainerRef = useRef(null);
+  const buttonContainerRef = useRef(null);
 
   const GOOGLE_API_KEY = "AIzaSyBwzqCuatStPuWQCvz9cPkgd_iJWBTlpn0";
   const CSE_ID = "f0cacdf5d6360444e";
@@ -37,6 +29,30 @@ const NewPrompt = ({ initialMessages = [], selectedModel, chatId, loading, error
   useEffect(() => {
     setMessages(initialMessages);
   }, [chatId, initialMessages]);
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      handleSubmit(e);
+    }
+  };
+
+  // Handle dynamic textarea height
+  useEffect(() => {
+    if (textareaRef.current && formContainerRef.current && buttonContainerRef.current) {
+      const textarea = textareaRef.current;
+      const formContainer = formContainerRef.current;
+      const buttonContainer = buttonContainerRef.current;
+
+      textarea.style.height = "auto";
+      const newTextAreaHeight = Math.min(textarea.scrollHeight, 250);
+      textarea.style.height = `${newTextAreaHeight}px`;
+
+      const buttonHeight = buttonContainer.offsetHeight + 20;
+      const totalHeight = newTextAreaHeight + buttonHeight + 20;
+      formContainer.style.height = `${Math.min(totalHeight, 400)}px`;
+    }
+  }, [inputText]);
 
   const fetchInternetData = async (query) => {
     try {
@@ -107,10 +123,10 @@ const NewPrompt = ({ initialMessages = [], selectedModel, chatId, loading, error
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const text = inputRef.current.value.trim();
+    const text = inputText.trim();
     if (!text) return;
     add(text);
-    inputRef.current.value = "";
+    setInputText("");
   };
 
   useEffect(() => {
@@ -127,7 +143,7 @@ const NewPrompt = ({ initialMessages = [], selectedModel, chatId, loading, error
 
   return (
     <div className="newPrompt">
-      <div className="messageContainer">
+      <div className="chatContainer">
         {loading ? (
           <div className="message assistant loading">Loading chat...</div>
         ) : error ? (
@@ -155,33 +171,43 @@ const NewPrompt = ({ initialMessages = [], selectedModel, chatId, loading, error
         )}
       </div>
 
-      <form className="formContainerNewPrompt" onSubmit={handleSubmit}>
-        {selectedModel === "general" && (
-          <div className="toggleWrapper">
-            <label className="toggleSwitch">
-              <input
-                type="checkbox"
-                checked={searchInternet}
-                onChange={() => setSearchInternet(!searchInternet)}
-              />
-              <span className="slider"></span>
-            </label>
-            <span className="toggleLabel">Search Internet</span>
+      <form className="formContainer" onSubmit={handleSubmit} ref={formContainerRef}>
+
+        <textarea
+          ref={textareaRef}
+          name="text"
+          placeholder={`Ask me anything... (Press Enter to send, Shift+Enter for new line)`}
+          autoComplete="off"
+          rows="2"
+          value={inputText}
+          onChange={(e) => setInputText(e.target.value)}
+          onKeyDown={handleKeyDown}
+        ></textarea>
+        <div className="formControls">
+          <div className="formControls-left">
+            {selectedModel === "general" && (
+              <div className="toggleWrapper">
+                <label className="toggleSwitch">
+                  <input
+                    type="checkbox"
+                    checked={searchInternet}
+                    onChange={() => setSearchInternet(!searchInternet)}
+                  />
+                  <span className="slider"></span>
+                </label>
+                <span className="toggleLabel">Search Internet</span>
+              </div>
+            )}
           </div>
-        )}
-        <div className="inputWrapper">
-          <input
-            type="text"
-            name="text"
-            placeholder={`Ask me anything...`}
-            autoComplete="off"
-            className="styledInput"
-            ref={inputRef}
-          />
-          <button type="submit" className="submitButtonNewPrompt">
-            <i className="fa fa-paper-plane"></i>
-          </button>
+          <div className="formControls-right">
+            <div className="button-container" ref={buttonContainerRef}>
+              <button type="submit" className="submitButton">
+                <i className="fa fa-paper-plane"></i>
+              </button>
+            </div>
+          </div>
         </div>
+
       </form>
     </div>
   );

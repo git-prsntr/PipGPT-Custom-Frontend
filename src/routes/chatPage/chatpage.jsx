@@ -100,56 +100,33 @@ const Chatpage = () => {
         pinnedChatsData?.find((chat) => chat.chatId === chatId)?.title ||
         "Chat Title";
 
-    // Loading text animation
-    const [loadingTextIndex, setLoadingTextIndex] = useState(0);
-    const loadingTexts = ["Digging resources...", "Connecting dots...", "Building sentences..."];
+  useEffect(() => {
+    if (!isLoadingChatId) {
+      refetch();
+    }
+  }, [chatId, refetch, isLoadingChatId]);
 
-    useEffect(() => {
-        if (!isLoading && !isLoadingChatId) return;
-        const interval = setInterval(() => {
-            setLoadingTextIndex((prevIndex) => (prevIndex + 1) % loadingTexts.length);
-        }, 1000);
-        return () => clearInterval(interval);
-    }, [isLoading, isLoadingChatId]);
+  return (
+    <div className="chatpage">
+      <div className="titleSection">
+        <h1 className="header-style">{chatTitle}</h1>
+        <h3>
+          You are using <b>{modelDisplayName}</b>. To use another model, create a new chat.
+        </h3>
+      </div>
 
+      <div className="chatContent">
+        <NewPrompt
+          initialMessages={data?.history || []}
+          selectedModel={selectedModel}
+          chatId={chatId}
+          loading={isLoading || isLoadingChatId}
+          error={error}
+        />
+      </div>
+    </div>
 
-    // Refetch when chatId changes, if valid
-    useEffect(() => {
-        if (!isLoadingChatId) {
-            refetch();
-        }
-    }, [chatId, refetch, isLoadingChatId]);
-
-
-    return (
-        <div className="chatpage">
-            <div className="titleSection">
-                <h2>{chatTitle}</h2>
-                <h3>
-                    You are using <b>{modelDisplayName}</b>. To use another model, create a new chat.
-                </h3>
-            </div>
-            <div className="wrapper">
-                <div className="chat">
-                    {(isLoading || isLoadingChatId) ? (
-                        <div className="message assistant loading">
-                            {loadingTexts[loadingTextIndex]} {/* Display rotating loading texts */}
-                        </div>
-                    ) : error ? (
-                        "Something went wrong!"
-                    ) : (
-                        data && (
-                            <NewPrompt
-                                initialMessages={data.history}
-                                selectedModel={selectedModel}
-                                chatId={chatId} // Pass chatId to NewPrompt
-                            />
-                        )
-                    )}
-                </div>
-            </div>
-        </div>
-    );
+  );
 };
 
 export default Chatpage;

@@ -334,6 +334,6 @@
 }
 
 .refreshPromptsButton:hover {
-    background: rgba(186, 24, 27, 0.7);
-    border-color: rgba(186, 24, 27, 1);
+    background: var(--primary-button-hover-background);
+    border-color: var(--feature-border)
 }
